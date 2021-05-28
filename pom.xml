@@ -13,61 +13,6 @@
     <description>Alink is the Machine Learning algorithm platform based on Flink, developed by the PAI team of Alibaba computing platform.</description>
     <url>https://github.com/alibaba/Alink</url>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <organization>
-		<name>Alibaba Group</name>
-		<url>https://github.com/alibaba</url>
-	</organization>
-
-    <developers>
-        <developer>
-            <name>xuyang1706</name>
-            <email>xuyang1706@gmail.com</email>
-        </developer>
-        <developer>
-            <name>chengscu</name>
-            <email>chengscu@qq.com</email>
-        </developer>
-        <developer>
-            <name>Fanoid</name>
-            <email>hongfanxo@gmail.com</email>
-        </developer>
-        <developer>
-            <name>hapsunday</name>
-            <email>hapsunday@gmail.com</email>
-        </developer>
-        <developer>
-            <name>liulfy</name>
-            <email>2691140740@qq.com</email>
-        </developer>
-        <developer>
-            <name>lqb11</name>
-            <email>liqianbing11@163.com</email>
-        </developer>
-        <developer>
-            <name>Xiafei Qiu</name>
-            <email>qiuxiafei@gmail.com</email>
-        </developer>
-        <developer>
-            <name>shaomengwang</name>
-            <email>shaomeng.wang.w@gmail.com</email>
-        </developer>
-        <developer>
-            <name>cainingnk</name>
-            <email>cainingnk@gmail.com</email>
-        </developer>
-        <developer>
-            <name>weibo.zwb</name>
-            <email>weibo.zwb@alibaba-inc.com</email>
-        </developer>
-    </developers>
 
     <scm>
         <connection>scm:git:git@github.com:alibaba/Alink.git</connection>

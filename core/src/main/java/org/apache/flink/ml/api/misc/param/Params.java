@@ -17,7 +17,6 @@ import java.util.stream.Stream;
  * Container class for parameters.
  */
 public class Params implements Serializable {
-	private static final long serialVersionUID = 7512382732224963858L;
 
 	private static Gson pGson =
 		new GsonBuilder()

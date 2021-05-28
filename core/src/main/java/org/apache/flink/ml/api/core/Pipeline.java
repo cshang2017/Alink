@@ -1,21 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.apache.flink.ml.api.core;
 
 import org.apache.flink.annotation.PublicEvolving;
@@ -58,8 +40,8 @@ import java.util.Map;
 @PublicEvolving
 public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transformer <Pipeline>,
 	Model <Pipeline> {
-	private static final long serialVersionUID = 1L;
-	private final List <PipelineStage> stages = new ArrayList <>();
+
+	private final List<PipelineStage> stages = new ArrayList <>();
 	private final Params params = new Params();
 
 	private int lastEstimatorIndex = -1;
@@ -71,7 +53,7 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 		this.loadJson(pipelineJson);
 	}
 
-	public Pipeline(List <PipelineStage> stages) {
+	public Pipeline(List<PipelineStage> stages) {
 		for (PipelineStage s : stages) {
 			appendStage(s);
 		}
@@ -92,11 +74,8 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 	public Pipeline appendStage(PipelineStage stage) {
 		if (isStageNeedFit(stage)) {
 			lastEstimatorIndex = stages.size();
-		} else if (!(stage instanceof Transformer)) {
-			throw new RuntimeException(
-				"All PipelineStages should be Estimator or Transformer, got:" +
-					stage.getClass().getSimpleName());
-		}
+		} 
+
 		stages.add(stage);
 		return this;
 	}
@@ -166,7 +145,7 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 	 */
 	@Override
 	public Pipeline fit(TableEnvironment tEnv, Table input) {
-		List <PipelineStage> transformStages = new ArrayList <>(stages.size());
+		List <PipelineStage>transformStages = new ArrayList <>(stages.size());
 		int lastEstimatorIdx = getIndexOfLastEstimator();
 		for (int i = 0; i < stages.size(); i++) {
 			PipelineStage s = stages.get(i);
@@ -198,9 +177,7 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 	 */
 	@Override
 	public Table transform(TableEnvironment tEnv, Table input) {
-		if (needFit()) {
-			throw new RuntimeException("Pipeline contains Estimator, need to fit first.");
-		}
+	
 		for (PipelineStage s : stages) {
 			input = ((Transformer) s).transform(tEnv, input);
 		}
@@ -219,23 +196,13 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 			stageJsons.add(stageMap);
 		}
 
-		try {
-			return mapper.writeValueAsString(stageJsons);
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("Failed to toString pipeline", e);
-		}
+		return mapper.writeValueAsString(stageJsons);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public void loadJson(String json) {
 		ObjectMapper mapper = new ObjectMapper();
-		List <Map <String, String>> stageJsons;
-		try {
-			stageJsons = mapper.readValue(json, List.class);
-		} catch (IOException e) {
-			throw new RuntimeException("Failed to parseDense pipeline json:" + json, e);
-		}
+		List <Map <String, String>> stageJsons = mapper.readValue(json, List.class);
 		for (Map <String, String> stageMap : stageJsons) {
 			appendStage(restoreInnerStage(stageMap));
 		}
@@ -243,20 +210,10 @@ public final class Pipeline implements Estimator <Pipeline, Pipeline>, Transform
 
 	private PipelineStage <?> restoreInnerStage(Map <String, String> stageMap) {
 		String className = stageMap.get("stageClassName");
-		Class <?> clz;
-		try {
-			clz = Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("PipelineStage class " + className + " not exists", e);
-		}
+		Class <?> clz = Class.forName(className);
 		InstantiationUtil.checkForInstantiation(clz);
 
-		PipelineStage <?> s;
-		try {
-			s = (PipelineStage <?>) clz.newInstance();
-		} catch (Exception e) {
-			throw new RuntimeException("Class is instantiable but failed to new an instance", e);
-		}
+		PipelineStage <?> s = (PipelineStage <?>) clz.newInstance();
 
 		String stageJson = stageMap.get("stageJson");
 		s.loadJson(stageJson);
