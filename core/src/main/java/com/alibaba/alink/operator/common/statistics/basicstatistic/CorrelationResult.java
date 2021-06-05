@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public class CorrelationResult implements Serializable {
 
-	private static final long serialVersionUID = -498543486504426397L;
 	/**
 	 * correlation data.
 	 */

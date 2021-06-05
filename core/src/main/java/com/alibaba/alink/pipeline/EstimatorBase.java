@@ -22,8 +22,6 @@ import com.alibaba.alink.operator.stream.source.TableSourceStreamOp;
 public abstract class EstimatorBase<E extends EstimatorBase <E, M>, M extends ModelBase <M>>
 	extends PipelineStageBase <E> implements Estimator <E, M> {
 
-	private static final long serialVersionUID = -6404177394828818348L;
-
 	public EstimatorBase() {
 		super();
 	}
@@ -34,10 +32,6 @@ public abstract class EstimatorBase<E extends EstimatorBase <E, M>, M extends Mo
 
 	@Override
 	public M fit(TableEnvironment tEnv, Table input) {
-		Preconditions.checkArgument(input != null, "Input CAN NOT BE null!");
-		Preconditions.checkArgument(
-			tableEnvOf(input) == tEnv,
-			"The input table is not in the specified table environment.");
 		return fit(input);
 	}
 
@@ -48,7 +42,7 @@ public abstract class EstimatorBase<E extends EstimatorBase <E, M>, M extends Mo
 	 * @return a model trained to fit on the given Table.
 	 */
 	public M fit(Table input) {
-		Preconditions.checkArgument(input != null, "Input CAN NOT BE null!");
+
 		if (tableEnvOf(input) instanceof StreamTableEnvironment) {
 			TableSourceStreamOp source = new TableSourceStreamOp(input);
 			if (this.params.contains(ML_ENVIRONMENT_ID)) {

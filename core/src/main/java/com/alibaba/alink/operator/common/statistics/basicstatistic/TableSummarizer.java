@@ -15,7 +15,6 @@ import java.util.Arrays;
  */
 public class TableSummarizer extends BaseSummarizer {
 
-	private static final long serialVersionUID = 4588962274305185787L;
 	/**
 	 * col names which will calculate.
 	 */

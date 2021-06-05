@@ -12,8 +12,6 @@ import com.alibaba.alink.pipeline.MapModel;
 public class VectorNearestNeighborModel extends MapModel <VectorNearestNeighborModel>
 	implements NearestNeighborPredictParams <VectorNearestNeighborModel> {
 
-	private static final long serialVersionUID = -3092782036238052302L;
-
 	public VectorNearestNeighborModel() {
 		this(null);
 	}

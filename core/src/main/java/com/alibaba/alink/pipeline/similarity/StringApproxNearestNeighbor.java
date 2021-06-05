@@ -16,7 +16,6 @@ public class StringApproxNearestNeighbor
 	implements StringTextApproxNearestNeighborTrainParams <StringApproxNearestNeighbor>,
 	NearestNeighborPredictParams <StringApproxNearestNeighbor> {
 
-	private static final long serialVersionUID = -1402702486415693096L;
 
 	public StringApproxNearestNeighbor() {
 		this(null);

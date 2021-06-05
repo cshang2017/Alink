@@ -21,9 +21,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 class SessionSharedObjs implements Serializable {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SessionSharedObjs.class);
-	private static final long serialVersionUID = 897586056141399032L;
-
 	private static HashMap <Tuple2 <String, Integer>, Long> key2Handle = new HashMap <>();
 
 	private static int sessionId = 0;
@@ -51,9 +48,6 @@ class SessionSharedObjs implements Serializable {
 	static void put(String objName, int session, int taskId, Object obj) {
 		rwlock.writeLock().lock();
 		try {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Put, taskId: {}, objName: {}, session: {}", taskId, objName, session);
-			}
 
 			Long handle = key2Handle.get(Tuple2.of(objName, session));
 
@@ -64,10 +58,6 @@ class SessionSharedObjs implements Serializable {
 
 			IterTaskObjKeeper.put(handle, taskId, obj);
 
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Put, taskId: {}, objName: {}, session: {}, handle: {} succeeded", taskId, objName, session,
-					handle);
-			}
 		} finally {
 			rwlock.writeLock().unlock();
 		}
@@ -258,9 +248,6 @@ class SessionSharedObjs implements Serializable {
 				if (next.getKey().f1.equals(session)) {
 					IterTaskObjKeeper.clear(next.getValue());
 					iter.remove();
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("State of session: {} has been removed", session);
-					}
 				}
 			}
 		} finally {

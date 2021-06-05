@@ -16,7 +16,6 @@ import java.util.Map;
  * Summary of OneHotModel.
  */
 public class OneHotModelInfo implements Serializable {
-	private static final long serialVersionUID = -4990829552802168917L;
 	public Map <String, List <String>> tokensMap;
 	public Map <String, Long> distinceTokenNumber;
 

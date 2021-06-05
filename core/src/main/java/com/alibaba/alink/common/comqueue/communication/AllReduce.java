@@ -41,7 +41,6 @@ import java.util.function.BiConsumer;
 public class AllReduce extends CommunicateFunction {
 	private static final int TRANSFER_BUFFER_SIZE = 1024 * 4;
 	private static final Logger LOG = LoggerFactory.getLogger(AllReduce.class);
-	private static final long serialVersionUID = 2878350590317507159L;
 
 	private final String bufferName;
 	private final String lengthName;
@@ -98,7 +97,6 @@ public class AllReduce extends CommunicateFunction {
 				new TupleTypeInfo <>(Types.INT, Types.INT, PrimitiveArrayTypeInfo.DOUBLE_PRIMITIVE_ARRAY_TYPE_INFO))
 			.name("AllReduceSend")
 			.partitionCustom(new Partitioner <Integer>() {
-				private static final long serialVersionUID = -5584126092583517829L;
 
 				@Override
 				public int partition(Integer key, int numPartitions) {
@@ -111,7 +109,6 @@ public class AllReduce extends CommunicateFunction {
 				new TupleTypeInfo <>(Types.INT, Types.INT, PrimitiveArrayTypeInfo.DOUBLE_PRIMITIVE_ARRAY_TYPE_INFO))
 			.name("AllReduceSum")
 			.partitionCustom(new Partitioner <Integer>() {
-				private static final long serialVersionUID = -2088778990924431340L;
 
 				@Override
 				public int partition(Integer key, int numPartitions) {
@@ -129,7 +126,6 @@ public class AllReduce extends CommunicateFunction {
 	 */
 	public final static SerializableBiConsumer <double[], double[]> SUM
 		= new SerializableBiConsumer <double[], double[]>() {
-		private static final long serialVersionUID = 1674418885589623933L;
 
 		@Override
 		public void accept(double[] a, double[] b) {
@@ -144,7 +140,6 @@ public class AllReduce extends CommunicateFunction {
 	 */
 	public final static SerializableBiConsumer <double[], double[]> MAX
 		= new SerializableBiConsumer <double[], double[]>() {
-		private static final long serialVersionUID = -7642209703460263383L;
 
 		@Override
 		public void accept(double[] a, double[] b) {
@@ -159,7 +154,6 @@ public class AllReduce extends CommunicateFunction {
 	 */
 	public final static SerializableBiConsumer <double[], double[]> MIN
 		= new SerializableBiConsumer <double[], double[]>() {
-		private static final long serialVersionUID = -5361253243150270428L;
 
 		@Override
 		public void accept(double[] a, double[] b) {
@@ -201,7 +195,6 @@ public class AllReduce extends CommunicateFunction {
 	}
 
 	private static class AllReduceSend<T> extends RichMapPartitionFunction <T, Tuple3 <Integer, Integer, double[]>> {
-		private static final long serialVersionUID = 762861369253958025L;
 		private final String bufferName;
 		private final String lengthName;
 		private final String transferBufferName;
@@ -276,7 +269,6 @@ public class AllReduce extends CommunicateFunction {
 
 	private static class AllReduceSum extends RichMapPartitionFunction <Tuple3 <Integer, Integer, double[]>,
 		Tuple3 <Integer, Integer, double[]>> {
-		private static final long serialVersionUID = -6816714426472711188L;
 		private final String bufferName;
 		private final String lengthName;
 		private final int sessionId;
@@ -340,7 +332,6 @@ public class AllReduce extends CommunicateFunction {
 	}
 
 	private static class AllReduceRecv<T> extends RichMapPartitionFunction <Tuple3 <Integer, Integer, double[]>, T> {
-		private static final long serialVersionUID = -2596118119896911087L;
 		private final String bufferName;
 		private final String lengthName;
 		private final int sessionId;

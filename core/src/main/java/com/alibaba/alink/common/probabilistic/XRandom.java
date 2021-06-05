@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class XRandom implements java.io.Serializable {
 
-	private static final long serialVersionUID = -3973714123611662398L;
 	private Random rn;
 
 	public XRandom() {

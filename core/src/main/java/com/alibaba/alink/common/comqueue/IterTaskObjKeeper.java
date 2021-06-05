@@ -23,8 +23,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class IterTaskObjKeeper implements Serializable {
 
-	private static final Logger LOG = LoggerFactory.getLogger(IterTaskObjKeeper.class);
-	private static final long serialVersionUID = -6620523029596479309L;
 
 	private static Map <Tuple2 <Long, Integer>, Object> states;
 
@@ -49,13 +47,7 @@ public class IterTaskObjKeeper implements Serializable {
 	public static void put(long handle, int taskId, Object state) {
 		rwlock.writeLock().lock();
 		try {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("taskId: {}, Put handle: {}", taskId, handle);
-			}
 			states.put(Tuple2.of(handle, taskId), state);
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("taskId: {}, Put handle succeeded: {}", taskId, handle);
-			}
 		} finally {
 			rwlock.writeLock().unlock();
 		}
@@ -64,18 +56,9 @@ public class IterTaskObjKeeper implements Serializable {
 	public static <T> T get(long handle, int taskId) {
 		rwlock.readLock().lock();
 		try {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("taskId: {}, Get handle: {}", taskId, handle);
-			}
 			if (states.containsKey(Tuple2.of(handle, taskId))) {
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("taskId: {}, Get handle succeeded: {}", taskId, handle);
-				}
 				return (T) states.get(Tuple2.of(handle, taskId));
 			} else {
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("taskId: {}, Get handle failed: {}", taskId, handle);
-				}
 				return null;
 			}
 		} finally {

@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class LdaModelMapper extends RichModelMapper {
 
-	private static final long serialVersionUID = -7533400774149397164L;
 	public LdaModelData modelData = new LdaModelData();
 	private int documentColIdx;
 	private DenseMatrix expELogBeta;

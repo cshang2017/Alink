@@ -9,7 +9,6 @@ import java.util.Arrays;
  */
 public class DenseMatrix implements Serializable {
 
-	private static final long serialVersionUID = 1561940270998763247L;
 	/**
 	 * Row dimension.
 	 * <p>

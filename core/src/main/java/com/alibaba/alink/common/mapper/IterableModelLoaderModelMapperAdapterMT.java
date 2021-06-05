@@ -17,7 +17,6 @@ import java.io.Serializable;
 
 public class IterableModelLoaderModelMapperAdapterMT extends RichFlatMapFunction <Row, Row> implements Serializable {
 
-	private static final long serialVersionUID = -727513055106586691L;
 	private ModelMapper iterableModelMapper;
 	private long handler;
 	private final int numThreads;

@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class DataBridgeModelSource implements ModelSource {
 
-	private static final long serialVersionUID = 3859074603903174913L;
 	/**
 	 * The DataBridge object to read model from.
 	 */

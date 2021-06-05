@@ -14,7 +14,6 @@ import java.io.Serializable;
  */
 public abstract class FlatMapper implements Serializable {
 
-	private static final long serialVersionUID = 1195341081802669684L;
 	/**
 	 * schema of the input.
 	 */

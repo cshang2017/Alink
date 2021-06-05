@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class GmmModelMapper extends RichModelMapper {
 
-	private static final long serialVersionUID = -4999832537099548829L;
 	private int vectorColIdx;
 	private GmmModelData modelData;
 	private MultivariateGaussian[] multivariateGaussians;

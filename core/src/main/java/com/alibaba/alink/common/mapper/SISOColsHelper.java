@@ -19,7 +19,6 @@ import java.io.Serializable;
  */
 class SISOColsHelper implements Serializable {
 
-	private static final long serialVersionUID = 4194684225961876694L;
 	/**
 	 * The OutputColsHelper which helps to arrange final output from input and predicted result.
 	 */

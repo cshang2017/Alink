@@ -14,7 +14,6 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class RichInputFormatWithClassLoader<T> extends RichInputFormat <T, InputSplit> {
-	private static final long serialVersionUID = 604359344643992350L;
 
 	private final ClassLoaderFactory factory;
 	private final byte[] serializedInputFormat;

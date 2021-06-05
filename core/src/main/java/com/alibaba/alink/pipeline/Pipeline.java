@@ -24,7 +24,6 @@ import static com.alibaba.alink.common.lazy.HasLazyPrintTransformInfo.LAZY_PRINT
  */
 public class Pipeline extends EstimatorBase <Pipeline, PipelineModel> {
 
-	private static final long serialVersionUID = 1562871813230757217L;
 	ArrayList <PipelineStageBase <?>> stages = new ArrayList <>();
 
 	public Pipeline() {
@@ -37,13 +36,11 @@ public class Pipeline extends EstimatorBase <Pipeline, PipelineModel> {
 
 	public Pipeline(PipelineStageBase <?>... stages) {
 		super(null);
-		if (null != stages) {
-			this.stages.addAll(Arrays.asList(stages));
-		}
+		this.stages.addAll(Arrays.asList(stages));
 	}
 
 	@Override
-	public Pipeline clone() throws CloneNotSupportedException {
+	public Pipeline clone()   {
 		Pipeline pipeline = new Pipeline();
 		for (PipelineStageBase <?> stage : this.stages) {
 			pipeline.add(stage.clone());
@@ -139,37 +136,16 @@ public class Pipeline extends EstimatorBase <Pipeline, PipelineModel> {
 				} else if (stage instanceof TransformerBase) {
 					transformers[i] = (TransformerBase <?>) stage;
 				}
+				
 				if (i < lastEstimatorIdx) {
-					// temporarily disable lazy print transform results
-					Boolean lazyPrintTransformDataEnabled = (Boolean) transformers[i].get(
-						LAZY_PRINT_TRANSFORM_DATA_ENABLED);
-					Boolean lazyPrintTransformStatEnabled = (Boolean) transformers[i].get(
-						LAZY_PRINT_TRANSFORM_STAT_ENABLED);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_DATA_ENABLED, false);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_STAT_ENABLED, false);
-
 					input = transformers[i].transform(input);
-
-					transformers[i].set(LAZY_PRINT_TRANSFORM_DATA_ENABLED, lazyPrintTransformDataEnabled);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_STAT_ENABLED, lazyPrintTransformStatEnabled);
 				}
 			} else {
 				// After lastEstimatorIdx, there're only Transformer stages, so it's safe to do type cast.
 				transformers[i] = (TransformerBase <?>) stage;
 
 				if(withTransform){
-					// temporarily disable lazy print transform results
-					Boolean lazyPrintTransformDataEnabled = (Boolean) transformers[i].get(
-						LAZY_PRINT_TRANSFORM_DATA_ENABLED);
-					Boolean lazyPrintTransformStatEnabled = (Boolean) transformers[i].get(
-						LAZY_PRINT_TRANSFORM_STAT_ENABLED);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_DATA_ENABLED, false);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_STAT_ENABLED, false);
-
 					input = transformers[i].transform(input);
-
-					transformers[i].set(LAZY_PRINT_TRANSFORM_DATA_ENABLED, lazyPrintTransformDataEnabled);
-					transformers[i].set(LAZY_PRINT_TRANSFORM_STAT_ENABLED, lazyPrintTransformStatEnabled);
 				}
 			}
 		}

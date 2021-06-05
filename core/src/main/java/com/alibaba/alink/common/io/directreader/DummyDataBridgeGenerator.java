@@ -14,7 +14,6 @@ public class DummyDataBridgeGenerator implements DataBridgeGenerator {
 	@Override
 	public DataBridge generate(BatchOperator<?> batchOperator, Params globalParams) {
 		return new DataBridge() {
-			private static final long serialVersionUID = 6522989683183226529L;
 
 			@Override
 			public List <Row> read(FilterFunction <Row> filter) {

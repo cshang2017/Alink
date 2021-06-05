@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class CatalogAnnotationUtils {
-	private static final Logger LOG = LoggerFactory.getLogger(CatalogAnnotationUtils.class);
 
 	private static final Map <String, Wrapper <BaseCatalog>> CATALOG_CLASSES = loadCatalogClasses();
 
@@ -25,8 +24,6 @@ public class CatalogAnnotationUtils {
 		Set <Class <?>> set = reflections.getTypesAnnotatedWith(CatalogAnnotation.class);
 		for (Class <?> clazz : set) {
 			if (!BaseCatalog.class.isAssignableFrom(clazz)) {
-				LOG.error("Catalog class annotated with @CatalogAnnotation should be subclass of BaseCatalog: {}",
-					clazz.getCanonicalName());
 				continue;
 			}
 
@@ -35,10 +32,6 @@ public class CatalogAnnotationUtils {
 			boolean hasTimestamp = annotation.hasTimestamp();
 			Wrapper <BaseCatalog> origin = map.put(name,
 				new Wrapper <>((Class <? extends BaseCatalog>) clazz, hasTimestamp));
-			if (origin != null) {
-				LOG.error("Multiple catalog class with same name {}: {} and {}",
-					name, origin.clazz.getCanonicalName(), clazz.getCanonicalName());
-			}
 		}
 
 		return ImmutableMap.copyOf(map);
@@ -58,9 +51,6 @@ public class CatalogAnnotationUtils {
 		if (BaseCatalog.class.isAssignableFrom(clazz)) {
 			CatalogAnnotation annotation = clazz.getAnnotation(CatalogAnnotation.class);
 			return annotation == null ? null : annotation.name();
-		} else {
-			throw new IllegalStateException(
-				"Only catalog class have annotated name: " + clazz.getCanonicalName());
 		}
 	}
 }

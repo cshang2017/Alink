@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @FSAnnotation(name = "local")
 public final class LocalFileSystem extends BaseFileSystem <LocalFileSystem> {
-	private static final long serialVersionUID = 1818806211030723090L;
 	private transient FileSystemFactory loaded;
 
 	public LocalFileSystem() {

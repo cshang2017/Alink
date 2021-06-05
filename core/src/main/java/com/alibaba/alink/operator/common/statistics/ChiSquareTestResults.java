@@ -9,7 +9,6 @@ import java.io.Serializable;
  * chi-square test result.
  */
 public class ChiSquareTestResults implements Serializable {
-	private static final long serialVersionUID = 4607796796072965555L;
 	public ChiSquareTestResult[] results;
 	public String[] selectedCols;
 

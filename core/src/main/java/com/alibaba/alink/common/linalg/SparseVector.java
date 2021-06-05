@@ -15,7 +15,6 @@ import java.util.function.BiConsumer;
  */
 public class SparseVector extends Vector {
 
-	private static final long serialVersionUID = -3756357155623064883L;
 	/**
 	 * Size of the vector. n = -1 indicates that the vector size is undetermined.
 	 * <p>

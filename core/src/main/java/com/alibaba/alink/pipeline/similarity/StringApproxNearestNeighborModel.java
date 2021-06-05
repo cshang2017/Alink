@@ -12,8 +12,6 @@ import com.alibaba.alink.pipeline.MapModel;
 public class StringApproxNearestNeighborModel extends MapModel <StringApproxNearestNeighborModel>
 	implements NearestNeighborPredictParams <StringApproxNearestNeighborModel> {
 
-	private static final long serialVersionUID = 3211910857263954316L;
-
 	public StringApproxNearestNeighborModel() {
 		this(null);
 	}

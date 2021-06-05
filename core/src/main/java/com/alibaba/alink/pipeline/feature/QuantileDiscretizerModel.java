@@ -12,7 +12,6 @@ import com.alibaba.alink.pipeline.MapModel;
 public class QuantileDiscretizerModel extends MapModel <QuantileDiscretizerModel>
 	implements QuantileDiscretizerPredictParams <QuantileDiscretizerModel> {
 
-	private static final long serialVersionUID = -7668583614855516255L;
 	
 	public QuantileDiscretizerModel() {
 		this(null);

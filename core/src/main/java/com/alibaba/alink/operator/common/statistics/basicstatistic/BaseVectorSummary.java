@@ -27,8 +27,6 @@ import com.alibaba.alink.common.linalg.Vector;
  */
 public abstract class BaseVectorSummary extends BaseSummary {
 
-	private static final long serialVersionUID = 2975659324193729466L;
-
 	/**
 	 * vector size.
 	 */

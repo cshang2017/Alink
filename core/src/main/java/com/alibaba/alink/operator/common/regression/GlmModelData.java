@@ -8,24 +8,11 @@ import com.alibaba.alink.params.regression.GlmTrainParams;
  */
 public class GlmModelData {
 
-	/**
-	 * feature names.
-	 */
 	public String[] featureColNames;
 
-	/**
-	 * offset col name.
-	 */
 	public String offsetColName;
-
-	/**
-	 * weight col name.
-	 */
 	public String weightColName;
 
-	/**
-	 * label col name.
-	 */
 	public String labelColName;
 
 	/**
@@ -48,9 +35,6 @@ public class GlmModelData {
 	 */
 	public double epsilon;
 
-	/**
-	 * family name.
-	 */
 	public GlmTrainParams.Family familyName;
 
 	/**

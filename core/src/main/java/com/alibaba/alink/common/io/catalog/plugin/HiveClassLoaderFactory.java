@@ -31,7 +31,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serializable {
-	private static final long serialVersionUID = 1233515535175478984L;
 
 	private final static Logger LOG = LoggerFactory.getLogger(HiveClassLoaderFactory.class);
 	private static final String HIVE_DB_NAME = "hive";
@@ -112,7 +111,6 @@ public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serial
 						return;
 					}
 
-					try {
 
 						Class <?> initializer = Class.forName(
 							"com.alibaba.alink.common.io.catalog.hive.plugin.initializer.HivePluginInitializer",
@@ -122,13 +120,6 @@ public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serial
 						Method method = initializer.getMethod("initialize", String.class);
 
 						method.invoke(null, configuration.getString(ConfigConstants.PATH_HADOOP_CONFIG, null));
-					} catch (ClassNotFoundException e) {
-						LOG.warn("Could not find HivePluginInitializer.", e);
-					} catch (NoSuchMethodException e) {
-						LOG.warn("Could not find the initialize method.", e);
-					} catch (IllegalAccessException | InvocationTargetException e) {
-						LOG.warn("Invoke the initialize error.", e);
-					}
 				}
 			}
 
@@ -154,7 +145,7 @@ public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serial
 			return null;
 		}
 
-		try (TemporaryClassLoaderContext context = TemporaryClassLoaderContext.of(classLoader)) {
+		TemporaryClassLoaderContext context = TemporaryClassLoaderContext.of(classLoader);
 
 			Class <?> initializer = Class.forName(
 				"com.alibaba.alink.common.io.catalog.hive.plugin.initializer.LoginUgi",
@@ -165,27 +156,11 @@ public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serial
 				.getConstructor(String.class, String.class)
 				.newInstance(kerberosPrincipal, kerberosKeytab);
 
-		} catch (ClassNotFoundException e) {
-			throw new IllegalArgumentException(
-				String.format("Could not find LoginUgi. Init kerberos error, Principal: %s", kerberosPrincipal), e);
-		} catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException(
-				String.format("Could not find the LoginUgi constructor. Init kerberos error, Principal: %s",
-					kerberosPrincipal), e);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			throw new IllegalArgumentException(
-				String.format("Invoke the LoginUgi constructor error. Init kerberos error, Principal: %s",
-					kerberosPrincipal), e);
-		} catch (InstantiationException e) {
-			throw new IllegalArgumentException(
-				String.format("Create LoginUgi error. Init kerberos error, Principal: %s", kerberosPrincipal), e);
-		}
 	}
 
 	private static class HiveVersionGetter implements Function <Tuple2 <TableFactory, PluginDescriptor>, String> {
 		@Override
 		public String apply(Tuple2 <TableFactory, PluginDescriptor> factory) {
-			try {
 				if (factory.f1.getVersion() != null) {
 					return factory.f1.getVersion();
 				}
@@ -198,13 +173,6 @@ public class HiveClassLoaderFactory extends ClassLoaderFactory implements Serial
 
 				int indexOfSlash = version.indexOf("-");
 				return indexOfSlash < 0 ? version : version.substring(0, indexOfSlash);
-			} catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-
-				LOG.warn("Cound not find the hive shim in class loader. factor: " + factory);
-
-				// pass
-				return factory.f1.getVersion();
-			}
 		}
 	}
 }

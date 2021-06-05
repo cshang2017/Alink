@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.io.Serializable;
 
 public class RegisterKey implements Serializable {
-	private static final long serialVersionUID = 7679702042658791364L;
 	private final String name;
 	private final String version;
 

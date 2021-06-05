@@ -16,8 +16,6 @@ public class VectorApproxNearestNeighbor
 	implements VectorApproxNearestNeighborTrainParams<VectorApproxNearestNeighbor>,
 	NearestNeighborPredictParams <VectorApproxNearestNeighbor> {
 
-	private static final long serialVersionUID = 4497001428586043776L;
-
 	public VectorApproxNearestNeighbor() {
 		this(null);
 	}

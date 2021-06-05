@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 
 public final class MapperMTWrapper extends RichFlatMapFunction <Row, Row> {
 
-	private static final long serialVersionUID = -1568535043779354034L;
-
 	public interface SupplierWithException<T> {
 
 		/**

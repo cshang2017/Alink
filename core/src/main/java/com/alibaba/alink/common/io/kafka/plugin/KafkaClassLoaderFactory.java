@@ -19,16 +19,11 @@ public class KafkaClassLoaderFactory extends ClassLoaderFactory {
 	}
 
 	public static KafkaSourceSinkFactory create(KafkaClassLoaderFactory factory) {
-		try {
 			return (KafkaSourceSinkFactory) factory
 				.create()
 				.loadClass("com.alibaba.alink.common.io.kafka.plugin.KafkaSourceSinkInPluginFactory")
 				.getConstructor()
 				.newInstance();
-		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |
-			ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	@Override

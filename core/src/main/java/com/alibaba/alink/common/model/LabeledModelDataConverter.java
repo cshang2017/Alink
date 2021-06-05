@@ -87,7 +87,6 @@ public abstract class LabeledModelDataConverter<M1, M2> implements ModelDataConv
 
 	@Override
 	public TableSchema getModelSchema() {
-		Preconditions.checkArgument(labelType != null, "label type is null.");
 		return new TableSchema(
 			new String[] {FIRST_COL_NAME, SECOND_COL_NAME, LABEL_COL_NAME},
 			new TypeInformation[] {FIRST_COL_TYPE, SECOND_COL_TYPE, labelType}

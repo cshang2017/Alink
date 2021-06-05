@@ -15,7 +15,6 @@ public class StringNearestNeighbor extends Trainer <StringNearestNeighbor, Strin
 	implements StringTextNearestNeighborTrainParams<StringNearestNeighbor>,
 	NearestNeighborPredictParams <StringNearestNeighbor> {
 
-	private static final long serialVersionUID = 6143617511190254429L;
 
 	public StringNearestNeighbor() {
 		this(null);

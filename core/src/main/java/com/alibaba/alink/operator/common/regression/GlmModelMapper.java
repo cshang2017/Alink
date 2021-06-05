@@ -3,7 +3,6 @@ package com.alibaba.alink.operator.common.regression;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.ml.api.misc.param.Params;
 import org.apache.flink.table.api.TableSchema;
-import org.apache.flink.table.api.Types;
 import org.apache.flink.types.Row;
 
 import com.alibaba.alink.common.mapper.ModelMapper;
@@ -22,7 +21,6 @@ import java.util.List;
  */
 public class GlmModelMapper extends ModelMapper {
 
-	private static final long serialVersionUID = 8193374524901551398L;
 	/**
 	 * coefficients of each features.
 	 */

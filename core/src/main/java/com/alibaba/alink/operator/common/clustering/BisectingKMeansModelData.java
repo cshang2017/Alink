@@ -15,10 +15,6 @@ public class BisectingKMeansModelData {
 	public Map <Long, ClusterSummary> summaries;
 
 	public static class ClusterSummary implements Serializable {
-		private static final long serialVersionUID = 8101449266148083555L;
-		/**
-		 * Cluster Id.
-		 */
 		public long clusterId;
 		/**
 		 * the number of points within this cluster

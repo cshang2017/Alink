@@ -11,7 +11,6 @@ import java.util.Map;
  * ClusteringModelSummary is the base summary class of clustering model.
  */
 public abstract class ClusteringModelInfo implements Serializable {
-	private static final long serialVersionUID = 3208128352349210878L;
 
 	public abstract int getClusterNumber();
 

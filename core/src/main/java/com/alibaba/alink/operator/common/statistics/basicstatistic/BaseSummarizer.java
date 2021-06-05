@@ -40,7 +40,6 @@ import java.io.Serializable;
  */
 public abstract class BaseSummarizer implements Serializable {
 
-	private static final long serialVersionUID = 4374764070923899198L;
 	/**
 	 * sum of outerProduct of each row.
 	 */

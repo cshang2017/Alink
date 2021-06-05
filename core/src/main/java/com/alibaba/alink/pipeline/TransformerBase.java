@@ -24,8 +24,6 @@ import com.alibaba.alink.operator.stream.source.TableSourceStreamOp;
 public abstract class TransformerBase<T extends TransformerBase <T>>
 	extends PipelineStageBase <T> implements Transformer <T>, HasLazyPrintTransformInfo <T> {
 
-	private static final long serialVersionUID = 4778337757277469411L;
-
 	public TransformerBase() {
 		super();
 	}
@@ -36,10 +34,6 @@ public abstract class TransformerBase<T extends TransformerBase <T>>
 
 	@Override
 	public Table transform(TableEnvironment tEnv, Table input) {
-		Preconditions.checkArgument(input != null, "Input CAN NOT BE null!");
-		Preconditions.checkArgument(
-			tableEnvOf(input) == tEnv,
-			"The input table is not in the specified table environment.");
 		return transform(input);
 	}
 
@@ -50,7 +44,6 @@ public abstract class TransformerBase<T extends TransformerBase <T>>
 	 * @return the transformed table
 	 */
 	public Table transform(Table input) {
-		Preconditions.checkArgument(input != null, "Input CAN NOT BE null!");
 		if (tableEnvOf(input) instanceof StreamTableEnvironment) {
 			TableSourceStreamOp source = new TableSourceStreamOp(input);
 			if (this.params.contains(ML_ENVIRONMENT_ID)) {

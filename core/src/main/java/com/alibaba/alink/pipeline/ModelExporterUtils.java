@@ -67,7 +67,6 @@ public class ModelExporterUtils {
 		while (!stack.isEmpty()) {
 			int lp = stack.pop();
 
-			// visit
 			consumer.accept(lp);
 
 			T node = stages[lp];
@@ -411,7 +410,6 @@ public class ModelExporterUtils {
 						.getModelData()
 						.getDataSet()
 						.map(new MapFunction <Row, Row>() {
-							private static final long serialVersionUID = 5218543921039328938L;
 
 							@Override
 							public Row map(Row value) {
@@ -522,21 +520,13 @@ public class ModelExporterUtils {
 		Consumer <Integer> deserializer = lp -> {
 			StageNode stageNode = stages[lp];
 
-			try {
 				if (stageNode.identifier != null) {
 					stageNode.stage = (PipelineStageBase <?>) Class
 						.forName(stageNode.identifier)
 						.getConstructor(Params.class)
 						.newInstance(stageNode.params);
 				}
-			} catch (ClassNotFoundException
-				| NoSuchMethodException
-				| InstantiationException
-				| IllegalAccessException
-				| InvocationTargetException ex) {
-
-				throw new IllegalArgumentException(ex);
-			}
+			
 
 			// leaf node.
 			if (stageNode.children == null) {
@@ -552,7 +542,6 @@ public class ModelExporterUtils {
 							deserialized[0]
 								.getDataSet()
 								.filter(new FilterFunction <Row>() {
-									private static final long serialVersionUID = 355683133177055891L;
 
 									@Override
 									public boolean filter(Row value) {
@@ -560,7 +549,6 @@ public class ModelExporterUtils {
 									}
 								})
 								.map(new MapFunction <Row, Row>() {
-									private static final long serialVersionUID = -4286266312978550037L;
 
 									@Override
 									public Row map(Row value) throws Exception {
@@ -585,7 +573,6 @@ public class ModelExporterUtils {
 							deserialized[0]
 								.getDataSet()
 								.filter(new FilterFunction <Row>() {
-									private static final long serialVersionUID = -2803966833769030531L;
 
 									@Override
 									public boolean filter(Row value) {
@@ -645,17 +632,12 @@ public class ModelExporterUtils {
 				}
 			} else {
 
-				try {
 					if (stages[lp].identifier != null) {
 						stages[lp].stage = (PipelineStageBase <?>) Class
 							.forName(stages[lp].identifier)
 							.getConstructor(Params.class)
 							.newInstance(stages[lp].params);
 					}
-				} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
-					IllegalAccessException | InvocationTargetException e) {
-					throw new RuntimeException(e);
-				}
 
 				// leaf node.
 				if (stages[lp].children != null) {
@@ -770,11 +752,7 @@ public class ModelExporterUtils {
 	public static Tuple2 <TableSchema, Row> loadMetaFromAkFile(FilePath filePath) {
 		MetaReader metaReader = new MetaReader();
 
-		try {
 			AkUtils.getFromFolderForEach(filePath, metaReader);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
-		}
 
 		return Tuple2.of(metaReader.getSchema(), metaReader.getMeta());
 	}
@@ -803,21 +781,12 @@ public class ModelExporterUtils {
 		Consumer <Integer> deserializer = lp -> {
 			StageNode stageNode = stages[lp];
 
-			try {
 				if (stageNode.identifier != null) {
 					stageNode.stage = (PipelineStageBase <?>) Class
 						.forName(stageNode.identifier)
 						.getConstructor(Params.class)
 						.newInstance(stageNode.params);
 				}
-			} catch (ClassNotFoundException
-				| NoSuchMethodException
-				| InstantiationException
-				| IllegalAccessException
-				| InvocationTargetException e) {
-
-				throw new IllegalArgumentException(e);
-			}
 
 			// leaf node.
 			if (stageNode.children == null) {

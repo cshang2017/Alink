@@ -6,7 +6,6 @@ import java.io.Serializable;
  * It is median result of sparse vector summary.
  */
 public class VectorStatCol implements Serializable {
-	private static final long serialVersionUID = -1651138051531660791L;
 	/**
 	 * number of non-zero value.
 	 */

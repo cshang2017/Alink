@@ -57,7 +57,6 @@ public class KMeansInitCentroids implements Serializable {
 	private static final String CENTER = "centers";
 	private static final String SUM_COSTS = "sumCosts";
 	private static final String VECTOR_SIZE = "vectorSize";
-	private static final long serialVersionUID = -8219073698493308787L;
 
 	public static DataSet <FastDistanceMatrixData> initKmeansCentroids(DataSet <FastDistanceVectorData> data,
 																	   FastDistance distance, Params params,
@@ -95,7 +94,6 @@ public class KMeansInitCentroids implements Serializable {
 															   int seed) {
 		return selectTopK(k, seed, data,
 			new Functional.SerializableFunction <FastDistanceVectorData, String>() {
-				private static final long serialVersionUID = 6092460932245165972L;
 
 				@Override
 				public String apply(FastDistanceVectorData v) {
@@ -105,7 +103,6 @@ public class KMeansInitCentroids implements Serializable {
 			})
 			.mapPartition(
 				new RichMapPartitionFunction <Tuple2 <Long, FastDistanceVectorData>, FastDistanceMatrixData>() {
-					private static final long serialVersionUID = 2012759243672199273L;
 
 					@Override
 					public void mapPartition(Iterable <Tuple2 <Long, FastDistanceVectorData>> values,
@@ -143,7 +140,6 @@ public class KMeansInitCentroids implements Serializable {
 		DataSet <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> dataNeighborMark = dataWithId.map(
 			new MapFunction <Tuple2 <Long, FastDistanceVectorData>,
 				Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>>() {
-				private static final long serialVersionUID = -8289894247468770813L;
 
 				@Override
 				public Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean> map(
@@ -175,7 +171,6 @@ public class KMeansInitCentroids implements Serializable {
 
 		DataSet <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> newCenter = dataOnly
 			.partitionCustom(new Partitioner <Long>() {
-				private static final long serialVersionUID = 8742959167492464159L;
 
 				@Override
 				public int partition(Long key, int numPartitions) {
@@ -204,7 +199,6 @@ public class KMeansInitCentroids implements Serializable {
 			.filter(new FilterData())
 			.map(new MapFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>, Tuple2 <Long, Long>>
 				() {
-				private static final long serialVersionUID = -7230628651729304469L;
 
 				@Override
 				public Tuple2 <Long, Long> map(Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean> t) {
@@ -236,8 +230,6 @@ public class KMeansInitCentroids implements Serializable {
 		final HashFunction hashFunc = murmur3_128(seed);
 
 		return data.map(new RichMapFunction <T, Tuple2 <Long, T>>() {
-			private static final long serialVersionUID = 6994623243686615646L;
-
 			@Override
 			public Tuple2 <Long, T> map(T value) throws Exception {
 				Long hashValue = hashFunc.hashUnencodedChars(func.apply(value)).asLong();
@@ -245,8 +237,6 @@ public class KMeansInitCentroids implements Serializable {
 			}
 		}).returns(new TupleTypeInfo(Types.LONG, dataType))
 			.mapPartition(new MapPartitionFunction <Tuple2 <Long, T>, TreeMapT>() {
-				private static final long serialVersionUID = 5813015538018452614L;
-
 				@Override
 				public void mapPartition(Iterable <Tuple2 <Long, T>> values,
 										 Collector <TreeMapT> out) throws Exception {
@@ -259,7 +249,6 @@ public class KMeansInitCentroids implements Serializable {
 				}
 			}).returns(TreeMapT.class)
 			.reduce(new ReduceFunction <TreeMapT>() {
-				private static final long serialVersionUID = -3472592245281912784L;
 
 				@Override
 				public TreeMapT reduce(TreeMapT value1, TreeMapT value2) throws Exception {
@@ -277,7 +266,6 @@ public class KMeansInitCentroids implements Serializable {
 				}
 			}).returns(TreeMapT.class)
 			.flatMap(new FlatMapFunction <TreeMapT, Tuple2 <Long, T>>() {
-				private static final long serialVersionUID = 3317982387795941044L;
 
 				@Override
 				public void flatMap(TreeMapT value, Collector <Tuple2 <Long, T>> out)
@@ -291,7 +279,6 @@ public class KMeansInitCentroids implements Serializable {
 	}
 
 	static class TreeMapT<T extends Serializable> implements Serializable {
-		private static final long serialVersionUID = -2350624942257559150L;
 		public TreeMap <Long, T> treeMap;
 
 		public TreeMapT() {
@@ -301,7 +288,6 @@ public class KMeansInitCentroids implements Serializable {
 
 	private static class FilterData
 		implements FilterFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> {
-		private static final long serialVersionUID = -7062845155572458129L;
 
 		@Override
 		public boolean filter(Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean> value)
@@ -312,7 +298,6 @@ public class KMeansInitCentroids implements Serializable {
 
 	private static class FilterCenter
 		implements FilterFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> {
-		private static final long serialVersionUID = -8363415544217000362L;
 
 		@Override
 		public boolean filter(Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean> value)
@@ -323,7 +308,6 @@ public class KMeansInitCentroids implements Serializable {
 
 	private static class FilterNewCenter
 		extends RichFilterFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> {
-		private static final long serialVersionUID = -6433641767140518820L;
 		private transient double costThre;
 		private transient Random random;
 		private int k;
@@ -350,7 +334,6 @@ public class KMeansInitCentroids implements Serializable {
 	private static class TransformToCenter
 		implements MapFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>,
 		Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> {
-		private static final long serialVersionUID = 5589065815045593976L;
 
 		@Override
 		public Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean> map(
@@ -365,7 +348,6 @@ public class KMeansInitCentroids implements Serializable {
 	private static class CalWeight extends
 		RichMapFunction <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>,
 			Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> {
-		private static final long serialVersionUID = 4828540656733702022L;
 		private transient List <Tuple5 <Long, FastDistanceVectorData, Long, Double, Boolean>> centers;
 		private FastDistance distance;
 
@@ -398,7 +380,6 @@ public class KMeansInitCentroids implements Serializable {
 
 	private static class LocalKmeans
 		extends RichMapPartitionFunction <Tuple2 <Long, FastDistanceVectorData>, FastDistanceMatrixData> {
-		private static final long serialVersionUID = 3014142447237244585L;
 		private FastDistance distance;
 		private int k;
 		private transient int vectorSize;

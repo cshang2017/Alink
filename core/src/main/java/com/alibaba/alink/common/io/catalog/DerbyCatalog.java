@@ -195,16 +195,10 @@ public class DerbyCatalog extends JdbcCatalog {
 	}
 
 	public static CatalogFactory createCatalogFactory(ClassLoader classLoader) {
-		try {
 			return (CatalogFactory) classLoader
 				.loadClass("com.alibaba.alink.common.io.catalog.derby.factories.DerbyCatalogFactory")
 				.getConstructor()
 				.newInstance();
-		} catch (ClassNotFoundException | NoSuchMethodException
-			| InstantiationException | IllegalAccessException | InvocationTargetException e) {
-
-			throw new RuntimeException("Could not find the derby catelog factory.", e);
-		}
 	}
 
 	private static JdbcCatalog createCatalog(Params params, ClassLoader classLoader) {

@@ -225,7 +225,6 @@ public class GlmUtil {
 
 				intercept = train(nullData, 0, familyLink, regParam, true, numIter, epsion)
 					.mapPartition(new MapPartitionFunction <WeightedLeastSquaresModel, Double>() {
-						private static final long serialVersionUID = 5705040804798450030L;
 
 						@Override
 						public void mapPartition(Iterable <WeightedLeastSquaresModel> iterable,
@@ -238,7 +237,6 @@ public class GlmUtil {
 			}
 		} else {
 			intercept = residual.map(new MapFunction <Row, Double>() {
-				private static final long serialVersionUID = -8549889611112875368L;
 
 				@Override
 				public Double map(Row row) {
@@ -278,7 +276,6 @@ public class GlmUtil {
 		DataSet <Double> aic = null;
 		if (familyName.equals("Tweedie")) {
 			aic = der.map(new MapFunction <Tuple5 <Double, Double, Double, Double, Double>, Double>() {
-				private static final long serialVersionUID = 218357090555877059L;
 
 				@Override
 				public Double map(Tuple5 <Double, Double, Double, Double, Double> doubleDoubleDoubleTuple3)
@@ -290,7 +287,6 @@ public class GlmUtil {
 			aic = residual.map(new BinomialAicTransform(numFeature))
 				.reduce(new GlobalSum())
 				.mapPartition(new MapPartitionFunction <Double, Double>() {
-					private static final long serialVersionUID = -6753822359386684791L;
 
 					@Override
 					public void mapPartition(Iterable <Double> iterable, Collector <Double> result) {
@@ -304,7 +300,6 @@ public class GlmUtil {
 				.withBroadcastSet(der, "deviance")
 				.reduce(new GlobalSum())
 				.mapPartition(new MapPartitionFunction <Double, Double>() {
-					private static final long serialVersionUID = -3707908727123276637L;
 
 					@Override
 					public void mapPartition(Iterable <Double> iterable, Collector <Double> result) {
@@ -319,7 +314,6 @@ public class GlmUtil {
 				.withBroadcastSet(der, "deviance")
 				.reduce(new GlobalSum())
 				.mapPartition(new MapPartitionFunction <Double, Double>() {
-					private static final long serialVersionUID = -7690462421422742899L;
 
 					@Override
 					public void mapPartition(Iterable <Double> iterable, Collector <Double> result) {

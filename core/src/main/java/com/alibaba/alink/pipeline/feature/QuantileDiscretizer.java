@@ -18,7 +18,6 @@ public class QuantileDiscretizer extends Trainer <QuantileDiscretizer, QuantileD
 	implements QuantileDiscretizerTrainParams <QuantileDiscretizer>,
 	QuantileDiscretizerPredictParams <QuantileDiscretizer>,
 	HasLazyPrintModelInfo <QuantileDiscretizer> {
-	private static final long serialVersionUID = -8169259273624463843L;
 
 	public QuantileDiscretizer() {
 		super();

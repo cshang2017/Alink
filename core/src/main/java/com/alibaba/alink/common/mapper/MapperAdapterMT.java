@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 public class MapperAdapterMT extends RichFlatMapFunction <Row, Row> implements Serializable {
 
-	private static final long serialVersionUID = -6526334200739568501L;
 	private final Mapper mapper;
 
 	private final int numThreads;

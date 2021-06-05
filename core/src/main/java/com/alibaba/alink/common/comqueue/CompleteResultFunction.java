@@ -10,8 +10,6 @@ import java.util.List;
  */
 public abstract class CompleteResultFunction implements Serializable {
 
-	private static final long serialVersionUID = 1867888701058224954L;
-
 	public abstract List <Row> calc(ComContext context);
 
 }

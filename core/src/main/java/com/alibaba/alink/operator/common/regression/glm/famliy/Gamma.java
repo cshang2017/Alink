@@ -5,16 +5,8 @@ import com.alibaba.alink.operator.common.regression.glm.link.Inverse;
 
 import java.io.Serializable;
 
-/**
- * Gamma family.
- */
 public class Gamma extends FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -4928389185867657173L;
-
-	/**
-	 * constructor.
-	 */
 	public Gamma() {
 		this.setDefaultLink(new Inverse());
 	}

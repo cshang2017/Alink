@@ -8,7 +8,6 @@ import java.util.Properties;
  */
 public class DirectReaderPropertiesStore implements Serializable {
 
-	private static final long serialVersionUID = 5410131486151673899L;
 	private static Properties PROPERTIES = new Properties();
 
 	/**

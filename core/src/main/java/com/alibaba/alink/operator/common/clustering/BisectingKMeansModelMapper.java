@@ -28,7 +28,6 @@ import java.util.Queue;
 
 public class BisectingKMeansModelMapper extends RichModelMapper {
 
-	private static final long serialVersionUID = 1293356859097519385L;
 	private BisectingKMeansModelData modelData;
 	private Tree tree;
 	private int vectorColIdx;

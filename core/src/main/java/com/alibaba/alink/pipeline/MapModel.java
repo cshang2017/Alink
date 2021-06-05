@@ -24,7 +24,6 @@ import java.util.List;
 public abstract class MapModel<T extends MapModel <T>>
 	extends ModelBase <T> implements LocalPredictable {
 
-	private static final long serialVersionUID = 8333228095437207694L;
 	/**
 	 * (modelScheme, dataSchema, params) -> ModelMapper
 	 */

@@ -50,7 +50,6 @@ public class DirectReader implements Serializable {
 		.setRequired()
 		.build();
 
-	private static final long serialVersionUID = 8810531309886342278L;
 
 	/**
 	 * Create data bridge from batch operator. The type of result DataBridge is the one with matching policy in global
@@ -138,8 +137,6 @@ public class DirectReader implements Serializable {
 			}
 
 			return params;
-		} else {
-			throw new RuntimeException("Error properties. it has not policy key");
 		}
 	}
 
@@ -149,11 +146,7 @@ public class DirectReader implements Serializable {
 		InputStream inputStream = null;
 		if (Files.exists(Paths.get(DIRECT_READER_CONFIG_FILE_PATH))) {
 			// load local configuration file
-			try {
 				inputStream = new FileInputStream(DIRECT_READER_CONFIG_FILE_PATH);
-			} catch (FileNotFoundException e) {
-				//pass
-			}
 		} else {
 			// load from file in classpath.
 			inputStream = Thread
@@ -163,11 +156,7 @@ public class DirectReader implements Serializable {
 		}
 
 		if (inputStream != null) {
-			try {
 				fileProperties.load(inputStream);
-			} catch (IOException e) {
-				//pass
-			}
 		}
 
 		Properties defaultProperties = new Properties();

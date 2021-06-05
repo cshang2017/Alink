@@ -24,7 +24,6 @@ import java.io.Serializable;
  * Family Link.
  */
 public class FamilyLink implements Serializable, AlinkSerializable {
-	private static final long serialVersionUID = -5636173906677739363L;
 
 	private FamilyFunction family;
 	private LinkFunction link;

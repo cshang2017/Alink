@@ -43,11 +43,7 @@ public class MLEnvironmentFactory {
 		if (!map.containsKey(mlEnvId)) {
 			if (mlEnvId.equals(DEFAULT_ML_ENVIRONMENT_ID)) {
 				setDefault(new MLEnvironment());
-			} else {
-				throw new IllegalArgumentException(
-					String.format("Cannot find MLEnvironment for MLEnvironmentId %s." +
-						" Did you get the MLEnvironmentId by calling getNewMLEnvironmentId?", mlEnvId));
-			}
+			} 
 		}
 
 		return map.get(mlEnvId);

@@ -14,7 +14,6 @@ import java.util.Set;
  */
 public class Crosstab implements Serializable {
 
-	private static final long serialVersionUID = -1986446660938874679L;
 	/**
 	 * col names of crosstab.
 	 */

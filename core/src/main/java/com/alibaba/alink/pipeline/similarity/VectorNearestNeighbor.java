@@ -15,8 +15,6 @@ public class VectorNearestNeighbor extends Trainer <VectorNearestNeighbor, Vecto
 	implements VectorNearestNeighborTrainParams<VectorNearestNeighbor>,
 	NearestNeighborPredictParams <VectorNearestNeighbor> {
 
-	private static final long serialVersionUID = 171026473979017010L;
-
 	public VectorNearestNeighbor() {
 		this(null);
 	}

@@ -19,8 +19,6 @@ import java.util.function.Predicate;
 
 public class ClassLoaderContainer {
 
-	private final static Logger LOG = LoggerFactory.getLogger(ClassLoaderContainer.class);
-
 	private static final ClassLoaderContainer INSTANCE = new ClassLoaderContainer();
 
 	public synchronized static ClassLoaderContainer getInstance() {
@@ -64,7 +62,6 @@ public class ClassLoaderContainer {
 			return hit;
 		}
 
-		LOG.warn("Could not find the service from factory. Return the thread context classloader by default.");
 
 		return Thread.currentThread().getContextClassLoader();
 	}
@@ -89,10 +86,8 @@ public class ClassLoaderContainer {
 			}
 
 			if (hit == null) {
-				LOG.warn("Could not find the class loader of service: {} exactly", JsonConverter.toJson(key));
 
 				if (loadedServices.size() > 1) {
-					LOG.warn("Find multiple services for {}, select the first randomly.", JsonConverter.toJson(key));
 				}
 
 				key = new RegisterKey(key.getName(), null);
@@ -122,7 +117,6 @@ public class ClassLoaderContainer {
 			pluginManager = PluginUtils.createPluginManagerFromRootFolder(readPluginConf(context));
 		}
 
-		try {
 			pluginManager
 				.load(service, AlinkGlobalConfiguration.getFlinkVersion(), key.getName(), key.getVersion())
 				.forEachRemaining(t -> {
@@ -132,11 +126,6 @@ public class ClassLoaderContainer {
 				});
 
 			return filterFromServices(key, loadedServices, versionGetter);
-		} catch (Exception e) {
-			LOG.warn("Could not find the {} from plugin. configure the plugin first. "
-				+ "see com.alibaba.alink.common.plugin.PluginResourceManager for help", service);
-			return null;
-		}
 	}
 
 	private static Configuration readPluginConf(Map <String, String> context) {

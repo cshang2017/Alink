@@ -140,7 +140,6 @@ public class ChiSquareTestUtil {
 	 * chi-square test build result.
 	 */
 	private static class BuildModelInfo implements MapFunction <Row, Row> {
-		private static final long serialVersionUID = 3043216661405231563L;
 		private String[] selectedColNames;
 		private BasedChisqSelectorParams.SelectorType selectorType;
 		private int numTopFeatures;

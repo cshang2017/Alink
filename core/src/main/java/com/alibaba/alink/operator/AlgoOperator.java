@@ -27,7 +27,6 @@ import java.lang.reflect.Field;
 public abstract class AlgoOperator<T extends AlgoOperator <T>>
 	implements WithParams <T>, HasMLEnvironmentId <T>, Serializable {
 
-	private static final long serialVersionUID = 5891637813713246040L;
 	/**
 	 * Params for algorithms.
 	 */
@@ -84,13 +83,7 @@ public abstract class AlgoOperator<T extends AlgoOperator <T>>
 	 * @return the table
 	 */
 	public Table getOutputTable() {
-		if (null == this.output) {
-			throw new RuntimeException(
-				"There is no output. Please call current BatchOperator's 'link' or related method firstly, "
-					+ "or this BatchOperator has no output.");
-		} else {
 			return this.output;
-		}
 	}
 
 	public boolean isNullOutputTable() {
@@ -287,7 +280,6 @@ public abstract class AlgoOperator<T extends AlgoOperator <T>>
 	protected void checkDefaultParameters() {
 		Field[] fields = getClass().getFields();
 		for (Field field : fields) {
-			try {
 				Object obj = field.get(this);
 				if (obj instanceof ParamInfo <?>) {
 					ParamInfo <?> paramInfo = (ParamInfo <?>) obj;
@@ -295,9 +287,6 @@ public abstract class AlgoOperator<T extends AlgoOperator <T>>
 						get((ParamInfo <?>) obj);
 					}
 				}
-			} catch (Exception ex) {
-				throw new RuntimeException(ex);
-			}
 		}
 	}
 

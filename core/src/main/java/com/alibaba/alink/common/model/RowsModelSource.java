@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class RowsModelSource implements ModelSource {
 
-	private static final long serialVersionUID = -5828728414934366284L;
 	/**
 	 * The rows that hosts the model.
 	 */

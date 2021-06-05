@@ -32,7 +32,6 @@ public class ChiSquareTest {
 		//flatting data to triple.
 		DataSet <Row> dataSet = in
 			.flatMap(new FlatMapFunction <Row, Row>() {
-				private static final long serialVersionUID = -5007568317570417558L;
 
 				@Override
 				public void flatMap(Row row, Collector <Row> result) {

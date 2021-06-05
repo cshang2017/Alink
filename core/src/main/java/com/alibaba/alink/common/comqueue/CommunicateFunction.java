@@ -7,8 +7,6 @@ import org.apache.flink.api.java.DataSet;
  */
 public abstract class CommunicateFunction implements ComQueueItem {
 
-	private static final long serialVersionUID = 1490761429919931093L;
-
 	/**
 	 * Perform communication work.
 	 *

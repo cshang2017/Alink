@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 abstract public class FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -6422267366086249380L;
 	/**
 	 * default link function.
 	 */

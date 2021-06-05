@@ -19,7 +19,6 @@ public class MultivariateGaussian implements Serializable {
 	private static final LAPACK LAPACK_INST = LAPACK.getInstance();
 	private static final com.github.fommil.netlib.BLAS F2J_BLAS_INST = com.github.fommil.netlib.F2jBLAS.getInstance();
 	private static final double EPSILON;
-	private static final long serialVersionUID = -5155224606070313042L;
 
 	static {
 		double eps = 1.0;

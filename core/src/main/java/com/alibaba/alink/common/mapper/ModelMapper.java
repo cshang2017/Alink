@@ -18,8 +18,6 @@ import java.util.List;
  * it should be override the mirror method to initial the buffer.
  */
 public abstract class ModelMapper extends Mapper {
-	private static final Logger LOG = LoggerFactory.getLogger(ModelMapper.class);
-	private static final long serialVersionUID = 4025027560447017077L;
 	/**
 	 * Field names of the model.
 	 */

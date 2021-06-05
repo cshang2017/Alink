@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class PipelineModel extends ModelBase <PipelineModel> implements LocalPredictable {
 
-	private static final long serialVersionUID = -7217216709192253383L;
 	TransformerBase <?>[] transformers;
 
 	public PipelineModel(Params params) {
@@ -78,9 +77,6 @@ public class PipelineModel extends ModelBase <PipelineModel> implements LocalPre
 
 	@Override
 	public LocalPredictor collectLocalPredictor(TableSchema inputSchema) throws Exception {
-		if (null == transformers || transformers.length == 0) {
-			throw new RuntimeException("PipelineModel is empty.");
-		}
 
 		List <BatchOperator <?>> allModelData = new ArrayList <>();
 

@@ -8,7 +8,6 @@ import java.util.Map;
 
 public abstract class ClassLoaderFactory implements Serializable {
 
-	private static final long serialVersionUID = -7228535414098842970L;
 
 	protected final RegisterKey registerKey;
 	protected final Map <String, String> registerContext;
@@ -30,19 +29,11 @@ public abstract class ClassLoaderFactory implements Serializable {
 	}
 
 	public void doAsThrowRuntime(PrivilegedExceptionActionWithoutReturn action) {
-		try {
 			doAs(action);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	public <T> T doAsThrowRuntime(PrivilegedExceptionAction <T> action) {
-		try {
 			return doAs(action);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	public <T> T doAs(PrivilegedExceptionAction <T> action) throws Exception {

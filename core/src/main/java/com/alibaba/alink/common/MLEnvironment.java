@@ -227,9 +227,6 @@ public class MLEnvironment {
 	 * @see MLEnvironment#getBatchTableEnvironment()
 	 */
 	public Table createBatchTable(List <Row> rows, String[] colNames) {
-		if (rows == null || rows.size() < 1) {
-			throw new IllegalArgumentException("Values can not be empty.");
-		}
 
 		Row first = rows.iterator().next();
 		int arity = first.getArity();
@@ -267,9 +264,6 @@ public class MLEnvironment {
 	 * @see MLEnvironment#getStreamTableEnvironment()
 	 */
 	public Table createStreamTable(List <Row> rows, String[] colNames) {
-		if (rows == null || rows.size() < 1) {
-			throw new IllegalArgumentException("Values can not be empty.");
-		}
 
 		Row first = rows.iterator().next();
 		int arity = first.getArity();

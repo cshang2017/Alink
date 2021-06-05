@@ -20,7 +20,6 @@ import java.util.Map;
  */
 public class SparseVectorSummary extends BaseVectorSummary {
 
-	private static final long serialVersionUID = 7656305964922586155L;
 	int colNum = -1;
 
 	Map <Integer, VectorStatCol> cols = new HashMap();

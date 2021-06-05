@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ModelMapperAdapter extends RichMapFunction <Row, Row> implements Serializable {
 
-	private static final long serialVersionUID = -2288549358571532418L;
 	/**
 	 * The ModelMapper to adapt.
 	 */

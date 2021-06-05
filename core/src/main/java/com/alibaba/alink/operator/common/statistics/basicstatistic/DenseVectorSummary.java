@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class DenseVectorSummary extends BaseVectorSummary {
 
-	private static final long serialVersionUID = -4454774580129514139L;
 	/**
 	 * sum of each feature: sum(x_i)
 	 */

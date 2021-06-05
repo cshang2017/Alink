@@ -34,21 +34,13 @@ public class RichParallelSourceFunctionWithClassLoader extends RichParallelSourc
 		this.factory = factory;
 		this.internal = internal;
 
-		try {
 			serializedRichParallelSourceFunction = InstantiationUtil.serializeObject(internal);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	private RichParallelSourceFunction <Row> getRichParallelSourceFunction() {
 
 		if (internal == null) {
-			try {
 				internal = InstantiationUtil.deserializeObject(serializedRichParallelSourceFunction, factory.create());
-			} catch (IOException | ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
 		}
 
 		return internal;
@@ -92,8 +84,6 @@ public class RichParallelSourceFunctionWithClassLoader extends RichParallelSourc
 	public void notifyCheckpointComplete(long checkpointId) throws Exception {
 		if (internal instanceof CheckpointListener) {
 			factory.doAsThrowRuntime(() -> (CheckpointListener) getRichParallelSourceFunction()).notifyCheckpointComplete(checkpointId);
-		} else {
-			throw new IllegalStateException("Internal is not the CheckpointListener.");
 		}
 	}
 
@@ -101,8 +91,6 @@ public class RichParallelSourceFunctionWithClassLoader extends RichParallelSourc
 	public void snapshotState(FunctionSnapshotContext context) throws Exception {
 		if (internal instanceof CheckpointedFunction) {
 			factory.doAsThrowRuntime(() -> (CheckpointedFunction) getRichParallelSourceFunction()).snapshotState(context);
-		} else {
-			throw new IllegalStateException("Internal is not the CheckpointedFunction.");
 		}
 	}
 
@@ -110,8 +98,6 @@ public class RichParallelSourceFunctionWithClassLoader extends RichParallelSourc
 	public void initializeState(FunctionInitializationContext context) throws Exception {
 		if (internal instanceof CheckpointedFunction) {
 			factory.doAsThrowRuntime(() -> (CheckpointedFunction) getRichParallelSourceFunction()).initializeState(context);
-		} else {
-			throw new IllegalStateException("Internal is not the CheckpointedFunction.");
 		}
 	}
 

@@ -39,7 +39,6 @@ import java.util.HashSet;
  * algorithms.
  */
 public class OutputColsHelper implements Serializable {
-	private static final long serialVersionUID = 1590546996380714412L;
 	private String[] inputColNames;
 	private TypeInformation[] inputColTypes;
 	private String[] outputColNames;

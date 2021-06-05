@@ -13,7 +13,6 @@ import com.alibaba.alink.operator.batch.BatchOperator;
 public abstract class ModelBase<M extends ModelBase <M>> extends TransformerBase <M>
 	implements Model <M> {
 
-	private static final long serialVersionUID = 1181492490109006467L;
 	protected BatchOperator <?> modelData;
 
 	public ModelBase() {

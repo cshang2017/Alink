@@ -22,7 +22,6 @@ import java.util.function.BiFunction;
 public abstract class MapTransformer<T extends MapTransformer <T>>
 	extends TransformerBase <T> implements LocalPredictable {
 
-	private static final long serialVersionUID = -2155940380618604038L;
 	final BiFunction <TableSchema, Params, Mapper> mapperBuilder;
 
 	protected MapTransformer(BiFunction <TableSchema, Params, Mapper> mapperBuilder, Params params) {

@@ -324,12 +324,8 @@ public abstract class JdbcCatalog extends BaseCatalog {
 		TableSchema schema;
 		InputFormat <Row, InputSplit> inputFormat;
 
-		try {
 			schema = getTable(objectPath).getSchema();
 			inputFormat = createInputFormat(objectPath, schema);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 
 		return DataStreamConversionUtil.toTable(
 			sessionId,
@@ -346,11 +342,7 @@ public abstract class JdbcCatalog extends BaseCatalog {
 	@Override
 	public void sinkStream(ObjectPath objectPath, Table in, Params params, Long sessionId) {
 		if (!tableExists(objectPath)) {
-			try {
 				createTable(objectPath, new CatalogTableImpl(in.getSchema(), Collections.emptyMap(), ""), true);
-			} catch (TableAlreadyExistException | DatabaseNotExistException ex) {
-				throw new CatalogException("Fail to create table: " + objectPath.toString(), ex);
-			}
 		}
 
 		TableSchema schema = in.getSchema();

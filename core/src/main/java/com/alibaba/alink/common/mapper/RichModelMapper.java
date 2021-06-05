@@ -23,7 +23,6 @@ import com.alibaba.alink.params.mapper.RichModelMapperParams;
  */
 public abstract class RichModelMapper extends ModelMapper {
 
-	private static final long serialVersionUID = -6722995426402759862L;
 	/**
 	 * The output column helper which control the output format.
 	 *

@@ -25,7 +25,6 @@ import java.util.Arrays;
  */
 public class DenseVectorSummarizer extends BaseVectorSummarizer {
 
-	private static final long serialVersionUID = -2340729400727454584L;
 	/**
 	 * sum(x_i)
 	 */

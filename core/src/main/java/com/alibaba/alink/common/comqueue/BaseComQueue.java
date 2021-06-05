@@ -38,7 +38,6 @@ import java.util.stream.Collectors;
  */
 public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 
-	private static final long serialVersionUID = -4727279909132083484L;
 	/**
 	 * All computation or communication functions.
 	 */
@@ -226,10 +225,9 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 				input
 					.mapPartition(new RichMapPartitionFunction <byte[], byte[]>() {
 
-						private static final long serialVersionUID = -5391702186659779224L;
 
 						@Override
-						public void mapPartition(Iterable <byte[]> values, Collector <byte[]> out) throws Exception {
+						public void mapPartition(Iterable <byte[]> values, Collector <byte[]> out)  {
 							if (getIterationRuntimeContext().getSuperstepNumber() == maxIter) {
 								ComContext context = new ComContext(sessionId, getIterationRuntimeContext());
 								List <Row> model = completeResult.calc(context);
@@ -264,7 +262,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			// we use 2 to implement this function.
 			DataSet <Boolean> criterion = input
 				.mapPartition(new RichMapPartitionFunction <byte[], Boolean>() {
-					private static final long serialVersionUID = 6625968106516906392L;
 
 					@Override
 					public void mapPartition(Iterable <byte[]> values, Collector <Boolean> out) throws Exception {
@@ -283,7 +280,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 				//completeResult
 				input
 					.mapPartition(new RichMapPartitionFunction <byte[], byte[]>() {
-						private static final long serialVersionUID = -2243669394358656436L;
 						boolean criterion;
 
 						@Override
@@ -352,7 +348,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 	private static DataSet <Row> serializeModel(DataSet <byte[]> model) {
 		return model
 			.map(new MapFunction <byte[], Row>() {
-				private static final long serialVersionUID = 7383520679708122544L;
 
 				@Override
 				public Row map(byte[] value) {
@@ -365,7 +360,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 	private static <T> DataSet <T> broadcastDataSet(DataSet <T> data) {
 		return expandDataSet2MaxParallelism(data)
 			.mapPartition(new RichMapPartitionFunction <T, Tuple2 <Integer, T>>() {
-				private static final long serialVersionUID = -4649163203694740662L;
 
 				@Override
 				public void mapPartition(Iterable <T> values, Collector <Tuple2 <Integer, T>> out) throws Exception {
@@ -380,7 +374,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			.returns(new TupleTypeInfo <>(Types.INT, data.getType()))
 			.name("sharedDataBroadcast")
 			.partitionCustom(new Partitioner <Integer>() {
-				private static final long serialVersionUID = -6692961321999695162L;
 
 				@Override
 				public int partition(Integer key, int numPartitions) {
@@ -389,7 +382,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			}, 0)
 			.name("sharedDataPartition")
 			.mapPartition(new RichMapPartitionFunction <Tuple2 <Integer, T>, T>() {
-				private static final long serialVersionUID = -4348660942756396179L;
 
 				@Override
 				public void mapPartition(Iterable <Tuple2 <Integer, T>> values, Collector <T> out) {
@@ -405,7 +397,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 	private static <T> DataSet <T> expandDataSet2MaxParallelism(DataSet <T> data) {
 		return data
 			.map(new RichMapFunction <T, Tuple2 <Integer, T>>() {
-				private static final long serialVersionUID = -3563752831074380126L;
 
 				@Override
 				public Tuple2 <Integer, T> map(T value) throws Exception {
@@ -419,7 +410,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			.name("appendTaskId2Data")
 			// use partitionCustom to expand dataset to max parallelism.
 			.partitionCustom(new Partitioner <Integer>() {
-				private static final long serialVersionUID = -8823979305373109564L;
 
 				@Override
 				public int partition(Integer key, int numPartitions) {
@@ -428,7 +418,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			}, 0)
 			.name("partitionData2Task")
 			.map(new MapFunction <Tuple2 <Integer, T>, T>() {
-				private static final long serialVersionUID = 7735842319931188500L;
 
 				@Override
 				public T map(Tuple2 <Integer, T> value) {
@@ -444,7 +433,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			.fromElements(1)
 			.rebalance()
 			.mapPartition(new MapPartitionFunction <Integer, byte[]>() {
-				private static final long serialVersionUID = 1605194585509760448L;
 
 				@Override
 				public void mapPartition(Iterable <Integer> values, Collector <byte[]> out) {
@@ -466,7 +454,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 				.getExecutionEnvironmentFromDataSets(raw)
 				.fromElements(0))
 			.mapPartition(new RichMapPartitionFunction <Integer, byte[]>() {
-				private static final long serialVersionUID = -7819774126101954367L;
 
 				@Override
 				public void mapPartition(Iterable <Integer> values, Collector <byte[]> out) {
@@ -475,7 +462,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			})
 			.withBroadcastSet(
 				raw.mapPartition(new MapPartitionFunction <byte[], byte[]>() {
-					private static final long serialVersionUID = 570124206050744389L;
 
 					@Override
 					public void mapPartition(Iterable <byte[]> values, Collector <byte[]> out) throws Exception {
@@ -486,7 +472,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			);
 		return raw
 			.map(new MapFunction <byte[], byte[]>() {
-				private static final long serialVersionUID = 6060666608672449498L;
 
 				@Override
 				public byte[] map(byte[] value) {
@@ -504,7 +489,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 			cacheDataRel = clearObjs(
 				data
 					.mapPartition(new MapPartitionFunction <T, byte[]>() {
-						private static final long serialVersionUID = 5119252579498807853L;
 
 						@Override
 						public void mapPartition(Iterable <T> values, Collector <byte[]> out) throws Exception {
@@ -552,7 +536,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 	}
 
 	private static class PutCachedData<T> extends RichMapPartitionFunction <T, byte[]> {
-		private static final long serialVersionUID = -6356063476350424243L;
 		private final String key;
 		private final int sessionId;
 		//		private int localRowCount;
@@ -608,7 +591,6 @@ public class BaseComQueue<Q extends BaseComQueue <Q>> implements Serializable {
 
 	@VisibleForTesting
 	static class DistributeData extends ComputeFunction {
-		private static final long serialVersionUID = -1105584217517972610L;
 		private final List <String> cacheDataObjNames;
 		private final int sessionId;
 

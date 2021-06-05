@@ -7,8 +7,6 @@ import java.io.Serializable;
  */
 public abstract class CompareCriterionFunction implements Serializable {
 
-	private static final long serialVersionUID = 7237307146597967965L;
-
 	/**
 	 * Check if it's ok to break iteration.
 	 *

@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 public class Tweedie extends FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -1740861370886826034L;
 	public double variancePower;
 	public double variancePower1;
 	public double variancePower2;

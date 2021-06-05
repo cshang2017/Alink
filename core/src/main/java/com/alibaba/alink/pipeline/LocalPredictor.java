@@ -30,35 +30,27 @@ public class LocalPredictor {
 		this(pipelineModelPath, CsvUtil.schemaStr2Schema(inputSchemaStr));
 	}
 
-	public LocalPredictor(FilePath pipelineModelPath, TableSchema inputSchema) throws Exception {
+	public LocalPredictor(FilePath pipelineModelPath, TableSchema inputSchema)  {
 		this(
-			Preconditions.checkNotNull(
+			
 				ModelExporterUtils
 					.loadLocalPredictorFromPipelineModel(
 						pipelineModelPath, inputSchema
-					),
-				"The input mappers can not be empty."
-			).mappers.toArray(new Mapper[0])
+					).mappers.toArray(new Mapper[0])
 		);
 	}
 
 	public LocalPredictor(List <Row> pipelineModel, TableSchema modelSchema, TableSchema inputSchema)
 		throws Exception {
 		this(
-			Preconditions.checkNotNull(
-				ModelExporterUtils
+			ModelExporterUtils
 					.loadLocalPredictorFromPipelineModel(
 						pipelineModel, modelSchema, inputSchema
-					),
-				"The input mappers can not be empty."
-			).mappers.toArray(new Mapper[0])
+					).mappers.toArray(new Mapper[0])
 		);
 	}
 
 	public LocalPredictor(Mapper... mappers) {
-		if (null == mappers || 0 == mappers.length) {
-			throw new RuntimeException("The input mappers can not be empty.");
-		}
 
 		this.mappers.addAll(Arrays.asList(mappers));
 	}

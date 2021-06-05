@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 public abstract class Mapper implements Serializable {
 
-	private static final long serialVersionUID = -3634328096241559957L;
 	/**
 	 * schema of the input.
 	 */

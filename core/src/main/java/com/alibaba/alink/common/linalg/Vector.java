@@ -7,7 +7,6 @@ import java.io.Serializable;
  * SparseVector.
  */
 public abstract class Vector implements Serializable {
-	private static final long serialVersionUID = 4693524240200898137L;
 
 	/**
 	 * Get the size of the vector.

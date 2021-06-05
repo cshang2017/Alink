@@ -19,8 +19,6 @@ public class PCA extends Trainer <PCA, PCAModel> implements
 	PcaPredictParams <PCA>,
 	HasLazyPrintModelInfo <PCA> {
 
-	private static final long serialVersionUID = 7745465302322281797L;
-
 	public PCA() {
 		super();
 	}

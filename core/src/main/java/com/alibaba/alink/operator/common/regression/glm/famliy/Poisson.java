@@ -11,11 +11,6 @@ import java.io.Serializable;
  */
 public class Poisson extends FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = 8591671846267117571L;
-
-	/**
-	 * constructor.
-	 */
 	public Poisson() {
 		this.setDefaultLink(new Log());
 	}

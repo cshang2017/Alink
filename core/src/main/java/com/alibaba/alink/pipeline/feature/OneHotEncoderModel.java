@@ -12,7 +12,6 @@ import com.alibaba.alink.pipeline.MapModel;
 public class OneHotEncoderModel extends MapModel <OneHotEncoderModel>
 	implements OneHotPredictParams <OneHotEncoderModel> {
 
-	private static final long serialVersionUID = 650547453981086250L;
 
 	public OneHotEncoderModel() {
 		this(null);

@@ -11,7 +11,6 @@ import com.alibaba.alink.operator.common.utils.PrettyDisplayUtils;
  */
 public class TableSummary extends BaseSummary {
 
-	private static final long serialVersionUID = 6895996471831836377L;
 	/**
 	 * col names which are calculated.
 	 */

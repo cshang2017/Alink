@@ -12,8 +12,6 @@ import com.alibaba.alink.pipeline.MapModel;
 public class PCAModel extends MapModel <PCAModel>
 	implements PcaPredictParams <PCAModel> {
 
-	private static final long serialVersionUID = 2561211264796620786L;
-
 	public PCAModel() {
 		this(null);
 	}

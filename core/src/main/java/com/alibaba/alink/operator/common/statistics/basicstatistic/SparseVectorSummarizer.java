@@ -28,7 +28,6 @@ import java.util.Map;
  */
 public class SparseVectorSummarizer extends BaseVectorSummarizer {
 
-	private static final long serialVersionUID = 930893828920978643L;
 	/**
 	 * colNum.
 	 */

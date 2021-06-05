@@ -26,7 +26,6 @@ import java.util.List;
  */
 public class AFTModelMapper extends RichModelMapper {
 
-	private static final long serialVersionUID = 984867877738156476L;
 	private int vectorColIndex = -1;
 	private double[] quantileProbabilities;
 	private LinearModelData model;

@@ -26,7 +26,6 @@ import com.alibaba.alink.common.linalg.Vector;
  * double mean = summary.mean(0)
  */
 public abstract class BaseVectorSummarizer extends BaseSummarizer {
-	private static final long serialVersionUID = -6594023541408617732L;
 
 	/**
 	 * when input a vector, update result.

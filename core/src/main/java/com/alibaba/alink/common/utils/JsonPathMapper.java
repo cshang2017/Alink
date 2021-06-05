@@ -23,7 +23,6 @@ import java.util.Arrays;
  */
 public class JsonPathMapper extends FlatMapper {
 
-	private static final long serialVersionUID = 2298589947480476734L;
 	private static Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 	private String[] jsonPaths;

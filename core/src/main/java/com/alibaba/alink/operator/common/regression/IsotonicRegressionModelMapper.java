@@ -21,7 +21,6 @@ import java.util.List;
  * This mapper predicts the isotonic regression result.
  */
 public class IsotonicRegressionModelMapper extends ModelMapper {
-	private static final long serialVersionUID = 4565470971830328037L;
 	private int colIdx;
 	private IsotonicRegressionModelData modelData;
 	private String vectorColName;

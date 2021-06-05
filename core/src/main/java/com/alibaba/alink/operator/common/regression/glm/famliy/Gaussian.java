@@ -10,18 +10,10 @@ import java.io.Serializable;
  */
 public class Gaussian extends FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -8301951604638868343L;
-
-	/**
-	 * constructor.
-	 */
 	public Gaussian() {
 		this.setDefaultLink(new Identity());
 	}
 
-	/**
-	 * @return link function name.
-	 */
 	@Override
 	public String name() {
 		return "Gaussian";

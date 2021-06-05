@@ -32,8 +32,6 @@ import static com.alibaba.alink.common.lazy.HasLazyPrintTrainInfo.LAZY_PRINT_TRA
 public abstract class Trainer<T extends Trainer <T, M>, M extends ModelBase <M>>
 	extends EstimatorBase <T, M> implements HasLazyPrintTransformInfo <T> {
 
-	private static final long serialVersionUID = -3065228676122699535L;
-
 	public Trainer() {
 		super();
 	}
@@ -44,43 +42,10 @@ public abstract class Trainer<T extends Trainer <T, M>, M extends ModelBase <M>>
 
 	@Override
 	public M fit(BatchOperator <?> input) {
-		BatchOperator <?> trainer = postProcessTrainOp(train(input));
-		return postProcessModel(createModel(trainer));
+		BatchOperator <?> trainer = train(input);
+		return createModel(trainer);
 	}
 
-	protected BatchOperator <?> postProcessTrainOp(BatchOperator <?> trainOp) {
-		LazyObjectsManager lazyObjectsManager = MLEnvironmentFactory.get(trainOp.getMLEnvironmentId())
-			.getLazyObjectsManager();
-		lazyObjectsManager.genLazyTrainOp(this).addValue(trainOp);
-		if (this instanceof HasLazyPrintTrainInfo) {
-			if (get(LAZY_PRINT_TRAIN_INFO_ENABLED)) {
-				((WithTrainInfo <?, ?>) trainOp).lazyPrintTrainInfo(get(LAZY_PRINT_TRAIN_INFO_TITLE));
-			}
-		}
-		if (this instanceof HasLazyPrintModelInfo) {
-			if (get(LAZY_PRINT_MODEL_INFO_ENABLED)) {
-				((WithModelInfoBatchOp <?, ?, ?>) trainOp).lazyPrintModelInfo(get(LAZY_PRINT_MODEL_INFO_TITLE));
-			}
-		}
-		return trainOp;
-	}
-
-	protected M postProcessModel(M model) {
-		LazyObjectsManager lazyObjectsManager = MLEnvironmentFactory.get(model.getMLEnvironmentId())
-			.getLazyObjectsManager();
-		lazyObjectsManager.genLazyModel(this).addValue(model);
-		if (this instanceof HasLazyPrintTransformInfo) {
-			if (get(LAZY_PRINT_TRANSFORM_DATA_ENABLED)) {
-				model.enableLazyPrintTransformData(
-					get(LAZY_PRINT_TRANSFORM_DATA_NUM),
-					get(LAZY_PRINT_TRANSFORM_DATA_TITLE));
-			}
-			if (get(LAZY_PRINT_TRANSFORM_STAT_ENABLED)) {
-				model.enableLazyPrintTransformStat(get(LAZY_PRINT_TRANSFORM_STAT_TITLE));
-			}
-		}
-		return model;
-	}
 
 	@Override
 	public M fit(StreamOperator <?> input) {
@@ -88,7 +53,6 @@ public abstract class Trainer<T extends Trainer <T, M>, M extends ModelBase <M>>
 	}
 
 	private M createModel(BatchOperator <?> model) {
-		try {
 			ParameterizedType pt =
 				(ParameterizedType) this.getClass().getGenericSuperclass();
 
@@ -97,10 +61,6 @@ public abstract class Trainer<T extends Trainer <T, M>, M extends ModelBase <M>>
 			return (M) classM.getConstructor(Params.class)
 				.newInstance(getParams())
 				.setModelData(model);
-
-		} catch (Exception ex) {
-			throw new RuntimeException(ex.toString());
-		}
 	}
 
 	protected abstract BatchOperator <?> train(BatchOperator <?> in);

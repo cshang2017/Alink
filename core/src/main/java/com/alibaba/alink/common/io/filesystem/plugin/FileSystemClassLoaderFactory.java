@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 
 public class FileSystemClassLoaderFactory extends ClassLoaderFactory {
 
-	private static final long serialVersionUID = 6388056534023187796L;
 
 	public FileSystemClassLoaderFactory(String name, String version) {
 		super(new RegisterKey(name, version), ClassLoaderContainer.createPluginContextOnClient());

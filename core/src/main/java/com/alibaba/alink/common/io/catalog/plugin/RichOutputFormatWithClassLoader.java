@@ -16,8 +16,6 @@ import java.io.IOException;
 public class RichOutputFormatWithClassLoader extends RichOutputFormat <Row>
 	implements InitializeOnMaster, FinalizeOnMaster {
 
-	private static final long serialVersionUID = 604359344643992350L;
-
 	private final ClassLoaderFactory factory;
 	private final byte[] serializedOutputFormat;
 

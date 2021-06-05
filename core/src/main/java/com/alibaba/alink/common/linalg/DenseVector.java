@@ -7,7 +7,6 @@ import java.util.Random;
  * A dense vector represented by a values array.
  */
 public class DenseVector extends Vector {
-	private static final long serialVersionUID = -5932985883649890536L;
 	/**
 	 * The array holding the vector data.
 	 * <p>

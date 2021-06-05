@@ -20,7 +20,6 @@ import java.net.URISyntaxException;
 @FSAnnotation(name = "oss")
 public final class OssFileSystem extends BaseFileSystem <OssFileSystem> {
 
-	private static final long serialVersionUID = 5666866643106003801L;
 
 	public final static String OSS_FILE_SYSTEM_NAME = "oss";
 

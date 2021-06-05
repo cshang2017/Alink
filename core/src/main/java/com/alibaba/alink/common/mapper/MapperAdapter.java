@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 public class MapperAdapter extends RichMapFunction <Row, Row> implements Serializable {
 
-	private static final long serialVersionUID = -1927258770772096125L;
 	private final Mapper mapper;
 
 	public MapperAdapter(Mapper mapper) {

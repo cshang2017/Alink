@@ -8,7 +8,6 @@ import java.io.Serializable;
  * RecommendationModelSummary is the base summary class of recommendation model.
  */
 public abstract class RecommendationModelInfo implements Serializable {
-	private static final long serialVersionUID = -9141825751591142318L;
 
 	public abstract int getUserNumber();
 

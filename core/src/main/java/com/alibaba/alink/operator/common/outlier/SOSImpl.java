@@ -43,7 +43,6 @@ public class SOSImpl {
 			.with(
 				new CrossFunction <Tuple2 <Integer, DenseVector>, Tuple2 <Integer, DenseVector>, Tuple3 <Integer,
 					Integer, Double>>() {
-					private static final long serialVersionUID = 3508552267272047608L;
 
 					@Override
 					public Tuple3 <Integer, Integer, Double> cross(Tuple2 <Integer, DenseVector> val1,
@@ -55,7 +54,6 @@ public class SOSImpl {
 			.groupBy(0)
 			.sortGroup(1, Order.ASCENDING)
 			.reduceGroup(new GroupReduceFunction <Tuple3 <Integer, Integer, Double>, Tuple2 <Integer, DenseVector>>() {
-				private static final long serialVersionUID = 5191524422176539783L;
 
 				@Override
 				public void reduce(Iterable <Tuple3 <Integer, Integer, Double>> values,//点i, 点j, 距离
@@ -139,7 +137,6 @@ public class SOSImpl {
 								final double perplexity, final int maxIter, final double tol) {
 		return dissimilarityVectors
 			.map(new MapFunction <Tuple2 <Integer, DenseVector>, Tuple2 <Integer, DenseVector>>() {
-				private static final long serialVersionUID = 8999369927201551000L;
 
 				@Override
 				public Tuple2 <Integer, DenseVector> map(Tuple2 <Integer, DenseVector> row) throws Exception {
@@ -182,7 +179,6 @@ public class SOSImpl {
 		return bindingProbabilityVectors
 			. <Tuple2 <Integer, Double>>flatMap(
 				new FlatMapFunction <Tuple2 <Integer, DenseVector>, Tuple2 <Integer, Double>>() {
-					private static final long serialVersionUID = -8050094778377458373L;
 
 					@Override
 					public void flatMap(Tuple2 <Integer, DenseVector> in,
@@ -196,7 +192,6 @@ public class SOSImpl {
 			.groupBy(0)
 			. <Tuple2 <Integer, Double>>reduceGroup(
 				new GroupReduceFunction <Tuple2 <Integer, Double>, Tuple2 <Integer, Double>>() {
-					private static final long serialVersionUID = -3769235835223439323L;
 
 					@Override
 					public void reduce(Iterable <Tuple2 <Integer, Double>> iterable,

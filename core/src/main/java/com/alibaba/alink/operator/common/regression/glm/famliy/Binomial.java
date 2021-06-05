@@ -11,18 +11,11 @@ import java.io.Serializable;
  */
 public class Binomial extends FamilyFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -5682911268542461866L;
 
-	/**
-	 * constructor.
-	 */
 	public Binomial() {
 		this.setDefaultLink(new Logit());
 	}
 
-	/**
-	 * @return link function name.
-	 */
 	@Override
 	public String name() {
 		return "Binomial";

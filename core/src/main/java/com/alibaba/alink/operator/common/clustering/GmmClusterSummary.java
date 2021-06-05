@@ -9,15 +9,8 @@ import java.io.Serializable;
  * Summary of a Gaussian Mixture Model cluster.
  */
 public class GmmClusterSummary implements Serializable {
-	private static final long serialVersionUID = -8205517186576977360L;
-	/**
-	 * Id of the cluster.
-	 */
 	public long clusterId;
 
-	/**
-	 * Weight of the cluster.
-	 */
 	public double weight;
 
 	/**
@@ -30,9 +23,6 @@ public class GmmClusterSummary implements Serializable {
 	 */
 	public DenseVector cov;
 
-	/**
-	 * The default constructor.
-	 */
 	public GmmClusterSummary() {
 	}
 

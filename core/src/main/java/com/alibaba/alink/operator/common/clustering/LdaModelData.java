@@ -10,7 +10,6 @@ import java.util.List;
  * The model data of lda algorithm.
  */
 public class LdaModelData implements Serializable {
-	private static final long serialVersionUID = -6704560030183165653L;
 
 	public LdaModelData() {}
 

@@ -10,7 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class InputSplitWithClassLoader implements InputSplit {
-	private static final long serialVersionUID = -7993725711297269105L;
 	private final ClassLoaderFactory factory;
 	private final byte[] serializedInputSplit;
 
@@ -20,21 +19,13 @@ public class InputSplitWithClassLoader implements InputSplit {
 		this.factory = factory;
 		this.inputSplit = inputSplit;
 
-		try {
 			serializedInputSplit = InstantiationUtil.serializeObject(inputSplit);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	public InputSplit getInputSplit() {
 
 		if (inputSplit == null) {
-			try {
 				inputSplit = InstantiationUtil.deserializeObject(serializedInputSplit, factory.create());
-			} catch (IOException | ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
 		}
 
 		return inputSplit;

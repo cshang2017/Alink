@@ -15,8 +15,6 @@ public class TextNearestNeighbor extends Trainer <TextNearestNeighbor, TextNeare
 	implements StringTextNearestNeighborTrainParams<TextNearestNeighbor>,
 	NearestNeighborPredictParams <TextNearestNeighbor> {
 
-	private static final long serialVersionUID = 1268955460048381622L;
-
 	public TextNearestNeighbor() {
 		this(null);
 	}

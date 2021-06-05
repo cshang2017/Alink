@@ -5,7 +5,6 @@ package com.alibaba.alink.common.io.directreader;
  */
 public final class DefaultDistributedInfo implements DistributedInfo {
 
-	private static final long serialVersionUID = -6343669035998389436L;
 
 	@Override
 	public long startPos(long taskId, long parallelism, long globalRowCnt) {

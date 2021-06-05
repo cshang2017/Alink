@@ -9,7 +9,6 @@ import java.io.Serializable;
  */
 public class Sqrt extends LinkFunction implements Serializable, AlinkSerializable {
 
-	private static final long serialVersionUID = -8670134540451701168L;
 
 	/**
 	 * @return link function name.

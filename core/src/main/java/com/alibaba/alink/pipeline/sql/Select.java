@@ -16,7 +16,6 @@ import com.alibaba.alink.pipeline.MapTransformer;
 public class Select extends MapTransformer <Select>
 	implements SelectParams <Select> {
 
-	private static final long serialVersionUID = 2785428191162271581L;
 
 	public Select() {
 		this(null);

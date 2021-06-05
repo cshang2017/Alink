@@ -151,18 +151,11 @@ public class HiveCatalog extends BaseCatalog {
 				FilePath.deserialize(getParams().get(HiveCatalogParams.HIVE_CONF_DIR))
 			);
 
-			try {
 				String principal = structure.getKerberosPrincipal();
 				FilePath keytabPath = structure.getKerberosKeytabPath();
 
 				getParams().set(HiveCatalogParams.KERBEROS_PRINCIPAL, principal);
 				getParams().set(HiveCatalogParams.KERBEROS_KEYTAB, keytabPath == null ? null : keytabPath.serialize());
-			} catch (IOException ignored) {
-				// pass
-
-				getParams().set(HiveCatalogParams.KERBEROS_PRINCIPAL, null);
-				getParams().set(HiveCatalogParams.KERBEROS_KEYTAB, null);
-			}
 		}
 	}
 

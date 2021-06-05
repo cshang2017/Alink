@@ -9,8 +9,6 @@ import com.alibaba.alink.operator.batch.clustering.KMeansTrainBatchOp;
 import com.alibaba.alink.operator.common.distance.FastDistance;
 import com.alibaba.alink.operator.common.distance.FastDistanceMatrixData;
 import com.alibaba.alink.operator.common.distance.FastDistanceVectorData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -19,8 +17,6 @@ import java.util.Arrays;
  */
 public class KMeansAssignCluster extends ComputeFunction {
 
-	private static final Logger LOG = LoggerFactory.getLogger(KMeansAssignCluster.class);
-	private static final long serialVersionUID = 1661237257173287045L;
 	private FastDistance fastDistance;
 	private transient DenseMatrix distanceMatrix;
 
@@ -30,8 +26,6 @@ public class KMeansAssignCluster extends ComputeFunction {
 
 	@Override
 	public void calc(ComContext context) {
-		LOG.info("StepNo {}, TaskId {} Assign cluster begins!", context.getStepNo(),
-			context.getTaskId());
 
 		Integer vectorSize = context.getObj(KMeansTrainBatchOp.VECTOR_SIZE);
 		Integer k = context.getObj(KMeansTrainBatchOp.K);
@@ -63,7 +57,6 @@ public class KMeansAssignCluster extends ComputeFunction {
 			KMeansUtil.updateSumMatrix(sample, 1, stepNumCentroids.f1, vectorSize, sumMatrixData, k, fastDistance,
 				distanceMatrix);
 		}
-		LOG.info("StepNo {}, TaskId {} Assign cluster ends!", context.getStepNo(), context.getTaskId());
 	}
 
 }

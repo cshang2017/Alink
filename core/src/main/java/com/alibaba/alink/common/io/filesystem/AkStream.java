@@ -9,14 +9,12 @@ import com.alibaba.alink.common.io.filesystem.binary.BinaryRecordReader;
 import com.alibaba.alink.common.io.filesystem.binary.BinaryRecordWriter;
 import com.alibaba.alink.common.utils.JsonConverter;
 import com.alibaba.alink.operator.common.io.csv.CsvUtil;
-import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -94,7 +92,6 @@ public class AkStream {
 
 			@Override
 			public boolean hasNext() {
-				try {
 					while (!binaryRecordReader.hasNextRecord()) {
 						ZipEntry entry;
 						while ((entry = inputStream.getNextEntry()) != null) {
@@ -110,18 +107,11 @@ public class AkStream {
 						}
 					}
 					return true;
-				} catch (IOException e) {
-					throw new RuntimeException("Could not get the next read.", e);
-				}
 			}
 
 			@Override
 			public Row next() {
-				try {
 					return binaryRecordReader.getNextRecord();
-				} catch (IOException e) {
-					throw new RuntimeException("Could not get the next read.", e);
-				}
 			}
 		}
 
@@ -161,11 +151,7 @@ public class AkStream {
 		}
 
 		public AkCollector getCollector() {
-			try {
 				return new AkCollector();
-			} catch (IOException e) {
-				throw new RuntimeException("Could not get the collector.", e);
-			}
 		}
 
 		public class AkCollector implements Collector <Row>, AutoCloseable {
@@ -184,20 +170,12 @@ public class AkStream {
 
 			@Override
 			public void collect(Row record) {
-				try {
 					binaryRecordWriter.writeRecord(record);
-				} catch (IOException e) {
-					throw new RuntimeException("Write the record fail.", e);
-				}
 			}
 
 			@Override
 			public void close() {
-				try {
 					AkWriter.this.close();
-				} catch (IOException e) {
-					throw new RuntimeException("Close the collector fail.", e);
-				}
 			}
 		}
 

@@ -23,8 +23,6 @@ public class Imputer extends Trainer <Imputer, ImputerModel> implements
 	ImputerPredictParams <Imputer>,
 	HasLazyPrintModelInfo<Imputer> {
 
-	private static final long serialVersionUID = 2312681208119505001L;
-
 	public Imputer() {
 		super();
 	}

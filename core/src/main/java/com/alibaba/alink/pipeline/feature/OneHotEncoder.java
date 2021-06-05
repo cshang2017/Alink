@@ -17,7 +17,6 @@ public class OneHotEncoder extends Trainer <OneHotEncoder, OneHotEncoderModel> i
 	OneHotPredictParams <OneHotEncoder>,
 	HasLazyPrintModelInfo <OneHotEncoder> {
 
-	private static final long serialVersionUID = -987476648422234074L;
 
 	public OneHotEncoder() {
 		super();

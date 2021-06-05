@@ -28,8 +28,6 @@ import java.util.Set;
  */
 public class AnnotationUtils {
 
-	private static final Logger LOG = LoggerFactory.getLogger(AnnotationUtils.class);
-
 	/**
 	 * Create a dynamic {@link ParamInfo}
 	 *
@@ -70,18 +68,12 @@ public class AnnotationUtils {
 		Set <Class <?>> set = reflections.getTypesAnnotatedWith(FSAnnotation.class);
 		for (Class <?> clazz : set) {
 			if (!BaseFileSystem.class.isAssignableFrom(clazz)) {
-				LOG.error("DB class annotated with @DBAnnotation should be subclass of BaseDB: {}",
-					clazz.getCanonicalName());
 				continue;
 			}
 
 			FSAnnotation annotation = clazz.getAnnotation(FSAnnotation.class);
 			String name = annotation.name();
 			Class <? extends BaseFileSystem <?>> origin = map.put(name, (Class <? extends BaseFileSystem <?>>) clazz);
-			if (origin != null) {
-				LOG.error("Multiple DB class with same name {}: {} and {}",
-					name, origin.getCanonicalName(), clazz.getCanonicalName());
-			}
 		}
 
 		return ImmutableMap.copyOf(map);
@@ -93,8 +85,6 @@ public class AnnotationUtils {
 		Table <String, IOType, Wrapper <AlgoOperator <?>>> table = HashBasedTable.create();
 		for (Class <?> clazz : reflections.getTypesAnnotatedWith(IoOpAnnotation.class)) {
 			if (!AlgoOperator.class.isAssignableFrom(clazz)) {
-				LOG.error("Class annotated with @IoOpAnnotation should be subclass of AlgoOperator: {}",
-					clazz.getCanonicalName());
 				continue;
 			}
 
@@ -105,11 +95,6 @@ public class AnnotationUtils {
 
 			Wrapper <AlgoOperator <?>> origin = table.put(name, ioType,
 				new Wrapper <>((Class <? extends AlgoOperator <?>>) clazz, hasTimestamp));
-
-			if (origin != null) {
-				LOG.error("Multiple IO Operator class with same name {} and IOType: {}: {} and {}",
-					name, ioType, origin.clazz.getCanonicalName(), clazz.getCanonicalName());
-			}
 		}
 
 		return ImmutableTable.copyOf(table);

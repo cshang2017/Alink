@@ -21,19 +21,14 @@ public class InputSplitAssignerWithClassLoader implements InputSplitAssigner {
 
 	@Override
 	public InputSplit getNextInputSplit(String host, int taskId) {
-		try {
 			return factory.doAs(() -> {
 				InputSplit raw = assigner.getNextInputSplit(host, taskId);
 				return raw == null ? null : new InputSplitWithClassLoader(factory, raw);
 			});
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	@Override
 	public void returnInputSplit(List <InputSplit> splits, int taskId) {
-		try {
 			factory.doAs(() -> {
 				List <InputSplit> newSplit = new ArrayList <>(splits.size());
 
@@ -43,8 +38,5 @@ public class InputSplitAssignerWithClassLoader implements InputSplitAssigner {
 
 				assigner.returnInputSplit(newSplit, taskId);
 			});
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

@@ -15,8 +15,6 @@ import java.util.function.Predicate;
 
 public class JdbcCatalogClassLoaderFactory extends ClassLoaderFactory implements Serializable {
 
-	private static final long serialVersionUID = -1012808895725991073L;
-
 	public JdbcCatalogClassLoaderFactory(String name, String version) {
 		super(new RegisterKey(name, version), ClassLoaderContainer.createPluginContextOnClient());
 	}

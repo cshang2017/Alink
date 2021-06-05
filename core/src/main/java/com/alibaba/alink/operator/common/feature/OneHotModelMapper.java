@@ -24,7 +24,6 @@ import java.util.Map;
  * This mapper maps some table columns to a binary vector. It encoding some columns to a key-value format.
  */
 public class OneHotModelMapper extends ModelMapper {
-	private static final long serialVersionUID = -6192598346177373139L;
 	OneHotMapperBuilder mapperBuilder;
 
 	/**

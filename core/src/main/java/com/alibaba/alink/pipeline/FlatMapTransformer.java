@@ -22,7 +22,6 @@ import java.util.function.BiFunction;
 public abstract class FlatMapTransformer<T extends FlatMapTransformer <T>>
 	extends TransformerBase <T> {
 
-	private static final long serialVersionUID = -2155940380618604038L;
 	final BiFunction <TableSchema, Params, FlatMapper> flatMapperBuilder;
 
 	protected FlatMapTransformer(BiFunction <TableSchema, Params, FlatMapper> flatMapperBuilder, Params params) {
